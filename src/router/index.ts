@@ -14,17 +14,24 @@ const router = createRouter({
       component: () => import('../pages/portafolio/PortfolioLayout.vue'),
       children: [
         {
-          path: '', // Página de las opciones (Logos, Juegos...)
+          path: '', 
           name: 'portafolio',
           component: () => import('../pages/portafolio/PortfolioIndex.vue')
         },
         {
-          path: ':category', // Página donde se ven los trabajos de esa categoría
+          path: ':category', 
           name: 'categoria-detalle',
           component: () => import('../pages/portafolio/CategoriaProyectos.vue'),
           props: true
         }
       ]
+    },
+    // --- NUEVA RUTA SOBRE MÍ ---
+    {
+      path: '/sobre-mi',
+      name: 'sobre-mi',
+      // Ajusta la ruta del archivo según dónde lo hayas guardado (ej: pages/sobre-mi/SobreMi.vue)
+      component: () => import('../pages/contacto/SobreMi.vue') 
     },
     {
       path: '/contacto',

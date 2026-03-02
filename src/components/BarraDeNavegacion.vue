@@ -20,7 +20,7 @@ const categoriasPortafolio = [
 </script>
 
 <template>
-  <header class="w-full bg-white border-b-4 border-black sticky top-0 z-[100] p-4 flex justify-center shadow-[0px_4px_0px_0px_rgba(0,0,0,1)]">
+  <header class="w-full bg-white border-b-4 border-black sticky top-0 z-100 p-4 flex justify-center shadow-[0px_4px_0px_0px_rgba(0,0,0,1)]">
     <NavigationMenu>
       <NavigationMenuList class="gap-2 md:gap-6">
         
@@ -39,7 +39,7 @@ const categoriasPortafolio = [
             </div>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul class="grid w-[240px] md:w-[320px] gap-3 p-4 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <ul class="grid w-60 md:w-[320px] gap-3 p-4 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <li v-for="item in categoriasPortafolio" :key="item.title">
                 <NavigationMenuLink as-child>
                   <RouterLink :to="item.href" class="block p-3 hover:bg-[#60D394] border-2 border-transparent hover:border-black transition-all group">

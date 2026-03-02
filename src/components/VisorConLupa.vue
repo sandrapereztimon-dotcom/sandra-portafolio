@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Maximize2, X, Search } from 'lucide-vue-next';
+import { Maximize2, X } from 'lucide-vue-next';
 
 defineProps<{ 
   src: string, 
@@ -44,8 +44,8 @@ const moverLupa = (e: MouseEvent) => {
         }"
       >
         <div class="absolute inset-0 flex items-center justify-center opacity-10">
-          <div class="w-full h-[1px] bg-black"></div>
-          <div class="h-full w-[1px] bg-black absolute"></div>
+          <div class="w-full h-px bg-black"></div>
+          <div class="h-full w-px bg-black absolute"></div>
         </div>
       </div>
 
@@ -58,10 +58,10 @@ const moverLupa = (e: MouseEvent) => {
       <Transition name="fade">
         <div 
           v-if="esFullscreen" 
-          class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-10"
+          class="fixed inset-0 z-9999 bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-10"
           @click="esFullscreen = false"
         >
-          <button class="absolute top-6 right-6 text-white p-2 border-4 border-white hover:bg-[#EE6055] hover:border-black transition-all z-[10000]">
+          <button class="absolute top-6 right-6 text-white p-2 border-4 border-white hover:bg-[#EE6055] hover:border-black transition-all z-10000">
             <X :size="40" stroke-width="3" />
           </button>
           

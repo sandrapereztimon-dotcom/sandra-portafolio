@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ArrowLeft, ZoomIn, Palette, Info } from 'lucide-vue-next';
 import { Card, CardContent } from '@/components/ui/card';
@@ -64,7 +64,6 @@ const tituloSeccion = computed(() => {
   return titulos[props.category] || props.category;
 });
 
-const proyectoSeleccionado = ref(null);
 </script>
 
 <template>
@@ -81,7 +80,7 @@ const proyectoSeleccionado = ref(null);
         <span class="font-black uppercase tracking-[0.2em] text-sm">Galería Detallada</span>
       </div>
       
-      <h1 class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none break-words">
+      <h1 class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none wrap-break-word">
         {{ tituloSeccion }}
       </h1>
     </header>
@@ -97,7 +96,7 @@ const proyectoSeleccionado = ref(null);
           <DialogTrigger as-child>
             <Card class="rounded-none border-4 border-black bg-white shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all group-hover:-translate-y-2 group-hover:shadow-[15px_15px_0px_0px_rgba(96,211,148,1)] cursor-pointer">
               <CardContent class="p-0">
-                <div :class="[trabajo.horizontal ? 'aspect-video' : 'aspect-[3/4]']" class="overflow-hidden border-b-4 border-black relative bg-gray-100">
+                <div :class="[trabajo.horizontal ? 'aspect-video' : 'aspect-3/4']" class="overflow-hidden border-b-4 border-black relative bg-gray-100">
                   <img :src="trabajo.src" :alt="trabajo.nombre" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                     <ZoomIn :size="48" class="text-white" />

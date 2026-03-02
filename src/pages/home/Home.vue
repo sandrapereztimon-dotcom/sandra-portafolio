@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import { Rocket, Sparkles, Mail, Instagram, Linkedin, Send } from 'lucide-vue-next';
+import { 
+  Rocket, 
+  Sparkles, 
+  Mail, 
+  Instagram, 
+  Linkedin, 
+  Send 
+} from 'lucide-vue-next';
 
 // Componentes Shadcn/ui
 import {
@@ -100,13 +107,19 @@ function setApi(val: any) { apiCarrusel.value = val; }
     <section class="flex flex-col md:flex-row items-center justify-center p-8 md:p-20 gap-12 min-h-[80vh]">
       <div class="w-full md:w-1/2 flex justify-center">
         <RouterLink to="/sobre-mi" class="relative group">
-          <div class="w-64 h-64 md:w-80 md:h-80 bg-[#FFD97D] border-4 border-black rounded-3xl flex items-center justify-center p-4 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:-translate-y-4 group-hover:rotate-3 group-hover:shadow-[16px_16px_0px_0px_rgba(96,211,148,1)]">
-            <div class="w-full h-full bg-white border-4 border-dashed border-black rounded-2xl flex flex-col items-center justify-center font-black text-center text-xl italic p-4">
-              <span class="text-sm not-italic opacity-50 mb-2 underline">Haz clic para conocerme</span>
-              PORTAFOLIO <br> SANDRA PÉREZ
+          <div class="w-64 h-64 md:w-80 md:h-80 bg-[#FFD97D] border-4 border-black rounded-3xl overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:-translate-y-4 group-hover:rotate-3 group-hover:shadow-[16px_16px_0px_0px_rgba(96,211,148,1)]">
+            <img 
+              src="/Img/Contacto/FotoPortafolio.jpg" 
+              alt="Sandra Pérez Portafolio" 
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity">
+              <span class="bg-white text-black font-black px-4 py-2 border-2 border-black uppercase text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                Conóceme
+              </span>
             </div>
           </div>
-          <div class="absolute -bottom-2 -left-4 bg-[#EE6055] text-white font-black px-4 py-1 border-4 border-black -rotate-6 uppercase text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+          <div class="absolute -bottom-2 -left-4 bg-[#EE6055] text-white font-black px-4 py-1 border-4 border-black -rotate-6 uppercase text-xs opacity-0 group-hover:opacity-100 transition-opacity z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             Sobre Mí →
           </div>
         </RouterLink>

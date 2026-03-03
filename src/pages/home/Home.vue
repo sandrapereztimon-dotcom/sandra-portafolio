@@ -5,9 +5,11 @@ import {
   ArrowRight, Star, Circle, Triangle, Square, ArrowLeft
 } from 'lucide-vue-next';
 
+// 1. IMPORTAMOS TU COMPONENTE
+import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
+
 // Componentes Shadcn/ui
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -19,13 +21,17 @@ const proyectosCarrusel = [
   { id: 4, titulo: 'Motion Graphics', tag: 'Animación', color: '#FBCFE8' },
 ];
 
+// --- LÓGICA CARRUSEL ---
 const apiCarrusel = ref(); 
 let intervalo: any = null;
+
 const iniciarAutoplay = () => {
   detenerAutoplay();
   intervalo = setInterval(() => { if (apiCarrusel.value) apiCarrusel.value.scrollNext(); }, 4000);
 };
+
 const detenerAutoplay = () => { if (intervalo) clearInterval(intervalo); };
+
 onMounted(() => { iniciarAutoplay(); });
 onUnmounted(() => { detenerAutoplay(); });
 
@@ -37,6 +43,8 @@ function setApi(val: any) { apiCarrusel.value = val; }
 
   <div class="min-h-screen bg-white text-black overflow-x-hidden selection:bg-[#FBCFE8] poppins-regular relative">
     
+    <BarraDeNavegacion />
+
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <Star :size="300" class="absolute -top-20 -right-20 text-[#FBCFE8]/30 animate-spin-slow fill-current stroke-0" />
       <Triangle :size="150" class="absolute top-1/3 left-10 text-black/5 animate-morph fill-current stroke-0" />
@@ -45,19 +53,6 @@ function setApi(val: any) { apiCarrusel.value = val; }
       <Star :size="80" class="absolute bottom-10 left-1/2 text-[#FBCFE8]/40 animate-pulse fill-current stroke-0" />
       <Triangle :size="120" class="absolute top-3/4 left-1/4 text-black/5 -rotate-12 fill-current stroke-0" />
     </div>
-
-    <nav class="w-full p-8 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-50">
-      <div class="poppins-black text-2xl tracking-tighter uppercase">sandra.perez</div>
-      <NavigationMenu>
-        <NavigationMenuList class="gap-8">
-          <NavigationMenuItem v-for="link in ['Home', 'About', 'Portfolio', 'Contact']" :key="link">
-            <NavigationMenuLink as-child :class="navigationMenuTriggerStyle()" class="poppins-regular text-xs border-b-2 border-transparent hover:border-black transition-all bg-transparent uppercase tracking-[0.2em]">
-              <RouterLink :to="link === 'Home' ? '/' : `/${link.toLowerCase()}`">{{ link }}</RouterLink>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </nav>
 
     <section class="min-h-[90vh] flex flex-col md:flex-row items-center justify-center px-8 md:px-20 py-24 relative z-10">
       
@@ -73,9 +68,9 @@ function setApi(val: any) { apiCarrusel.value = val; }
       </div>
 
       <div class="w-full md:w-1/2 text-black md:pl-16 flex flex-col justify-center">
-        <h1 class="text-6xl sm:text-7xl lg:text-[9rem] poppins-black leading-[0.85] tracking-tighter uppercase break-words overflow-hidden">
+        <h1 class="text-6xl sm:text-7xl lg:text-[8.5rem] poppins-black leading-[0.85] tracking-tighter uppercase break-words">
           DISEÑO E <br> 
-          <span class="radley-regular-italic lowercase text-[0.8em] tracking-normal block">Ilustración.</span>
+          <span class="radley-regular-italic lowercase text-[0.8em] tracking-normal block md:inline">Ilustración.</span>
         </h1>
         
         <div class="mt-10 space-y-8 max-w-xl">
@@ -127,10 +122,10 @@ function setApi(val: any) { apiCarrusel.value = val; }
       </div>
     </section>
 
-    <section class="py-40 bg-black text-white relative z-10 overflow-hidden">
+    <section class="py-40 bg-black text-white relative z-10 overflow-hidden text-center">
       <Star :size="400" class="absolute -bottom-20 -left-20 text-white/5 animate-spin-slow fill-current stroke-0" />
       
-      <div class="container mx-auto px-6 text-center relative z-20">
+      <div class="container mx-auto px-6 relative z-20">
         <h2 class="text-5xl md:text-8xl poppins-black uppercase leading-none mb-10 tracking-tighter">
           ¿Tienes alguna idea <br> en mente? <br>
           <span class="radley-regular-italic text-[#FBCFE8] lowercase tracking-normal">¡hagámosla realidad!</span>
@@ -160,7 +155,6 @@ function setApi(val: any) { apiCarrusel.value = val; }
 .radley-regular { font-family: "Radley", serif; font-weight: 400; }
 .radley-regular-italic { font-family: "Radley", serif; font-weight: 400; font-style: italic; }
 
-/* Animaciones */
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes bounce-custom { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
@@ -171,8 +165,7 @@ function setApi(val: any) { apiCarrusel.value = val; }
 .animate-bounce-custom { animation: bounce-custom 10s ease-in-out infinite; }
 .animate-morph { animation: morph 12s ease-in-out infinite; }
 
-/* Evitar desborde horizontal de títulos */
-h1 { overflow-wrap: break-word; word-wrap: break-word; }
+h1 { overflow-wrap: break-word; }
 
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: white; }

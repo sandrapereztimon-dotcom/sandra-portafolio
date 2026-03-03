@@ -1,68 +1,79 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import { ArrowLeft, GraduationCap, Heart, Sparkles } from 'lucide-vue-next';
-// Asegúrate de que esta ruta sea la correcta en tu proyecto
-import BarraDeNavegacion from '@/components/ui/navigation-menu/NavigationMenu.vue'; 
+import { ArrowLeft, GraduationCap, Heart, Sparkles, Star } from 'lucide-vue-next';
+// Importación corregida de tu componente
+import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue'; 
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#FFD97D] p-6 md:p-12 lg:p-20 font-poppins text-black overflow-hidden">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+
+  <div class="min-h-screen bg-white text-black font-poppins overflow-hidden relative">
     
-    <div class="max-w-5xl mx-auto">
-      <RouterLink to="/" class="inline-flex items-center gap-2 font-black uppercase mb-12 hover:-translate-x-1 transition-all bg-white px-4 py-2 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-        <ArrowLeft :size="20" /> Volver al inicio
+    <BarraDeNavegacion />
+
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <Star :size="300" class="absolute -top-20 -right-20 text-[#FBCFE8]/30 animate-spin-slow fill-current stroke-0" />
+      <div class="absolute bottom-1/4 -left-10 w-40 h-40 bg-[#FBCFE8]/20 rounded-full animate-pulse"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-20 relative z-10">
+      
+      <RouterLink to="/" class="inline-flex items-center gap-2 font-black uppercase mb-12 hover:-translate-x-1 transition-all bg-[#FBCFE8] px-6 py-3 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1">
+        <ArrowLeft :size="20" /> Inicio
       </RouterLink>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         
-        <div class="lg:col-span-4 flex flex-col items-center">
+        <div class="lg:col-span-5 flex justify-center">
           <div class="relative animate-drop-in">
-            <div class="w-64 h-80 bg-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div class="w-72 h-96 md:w-[400px] md:h-[500px] bg-white border-[8px] border-black shadow-[20px_20px_0px_0px_rgba(251,207,232,1)] overflow-hidden">
               <img 
                 src="/Img/Contacto/FotoPortafolio.jpg" 
                 alt="Sandra Pérez" 
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
             
-            <div class="absolute -top-4 -left-4 bg-[#60D394] border-4 border-black p-2 rotate-12 animate-bounce-slow">
-              <Sparkles class="text-black" />
+            <div class="absolute -top-6 -left-6 bg-[#60D394] border-4 border-black p-3 rotate-12 animate-bounce-slow shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <Sparkles :size="32" class="text-black" />
             </div>
 
-            <div class="absolute -bottom-4 -right-4 bg-[#EE6055] border-4 border-black px-6 py-2 font-black text-white -rotate-3 uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div class="absolute -bottom-6 -right-6 bg-black border-4 border-white px-8 py-4 font-black text-white -rotate-3 uppercase shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-xl">
               Sandra Pérez
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-8 space-y-8 animate-fade-in-up">
-          <h1 class="text-6xl md:text-8xl font-black uppercase leading-[0.8] tracking-tighter">
-            SOBRE <span class="text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]">MÍ_</span>
+        <div class="lg:col-span-7 space-y-10 animate-fade-in-up">
+          <h1 class="text-7xl md:text-[10rem] font-black uppercase leading-[0.75] tracking-tighter italic">
+            HOLA<span class="text-[#FBCFE8] not-italic">!</span><br>
+            <span class="text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]">SOY YO_</span>
           </h1>
           
-          <div class="bg-white border-4 border-black p-8 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
-            <p class="text-xl font-bold leading-tight mb-6">
-              ¡Hola! Soy Sandra, diseñadora e ilustradora. Me especializo en crear contenido visual que no pase desapercibido.
+          <div class="bg-white border-4 border-black p-10 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative">
+            <p class="text-2xl font-bold leading-tight mb-8">
+              ¡Hola! Soy Sandra, diseñadora e ilustradora. Me especializo en crear contenido visual que no pase desapercibido, mezclando lo digital con lo artesanal.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t-4 border-black/10">
-              <div class="space-y-2">
-                <h3 class="font-black uppercase flex items-center gap-2 text-[#EE6055]">
-                  <GraduationCap /> Formación
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t-4 border-black">
+              <div class="space-y-3">
+                <h3 class="font-black uppercase flex items-center gap-2 text-xl">
+                  <GraduationCap class="text-[#FBCFE8] fill-black" /> Formación
                 </h3>
-                <p class="font-bold text-sm">Diseño y Artes Plásticas</p>
-                <p class="opacity-60 text-xs uppercase font-black tracking-widest">2024 - 2026</p>
+                <p class="font-bold">Diseño y Artes Plásticas</p>
+                <p class="bg-black text-white inline-block px-3 py-1 text-xs font-black tracking-widest uppercase">2024 - 2026</p>
               </div>
-              <div class="space-y-2">
-                <h3 class="font-black uppercase flex items-center gap-2 text-[#60D394]">
-                  <Heart /> Intereses
+              <div class="space-y-3">
+                <h3 class="font-black uppercase flex items-center gap-2 text-xl">
+                  <Heart class="text-[#FBCFE8] fill-black" /> Intereses
                 </h3>
-                <p class="font-bold text-sm">Ilustración, UI/UX, Animación</p>
+                <p class="font-bold">Ilustración, UI/UX, Animación 2D</p>
               </div>
             </div>
           </div>
 
-          <div class="inline-block bg-black text-white font-black px-6 py-3 border-4 border-black shadow-[6px_6px_0px_0px_rgba(96,211,148,1)] uppercase italic">
+          <div class="inline-block bg-[#FBCFE8] text-black font-black px-8 py-4 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] uppercase italic text-xl">
             "Diseñando el futuro, un píxel a la vez"
           </div>
         </div>
@@ -72,50 +83,43 @@ import BarraDeNavegacion from '@/components/ui/navigation-menu/NavigationMenu.vu
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
 .font-poppins { font-family: 'Poppins', sans-serif; }
 
-/* Animación para que la foto caiga desde arriba */
+/* Animación de entrada de la foto */
 @keyframes dropIn {
-  0% {
-    transform: translateY(-200px) rotate(-10deg);
-    opacity: 0;
-  }
-  60% {
-    transform: translateY(20px) rotate(5deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
+  0% { transform: translateY(-150px) rotate(-10deg); opacity: 0; }
+  100% { transform: translateY(0) rotate(0deg); opacity: 1; }
 }
 
-/* Animación para el contenido */
+/* Animación de subida del texto */
 @keyframes fadeInUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes bounceSlow {
   0%, 100% { transform: translateY(0) rotate(12deg); }
-  50% { transform: translateY(-10px) rotate(15deg); }
+  50% { transform: translateY(-15px) rotate(15deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .animate-drop-in {
-  animation: dropIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: dropIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out 0.3s both;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
 .animate-bounce-slow {
-  animation: bounceSlow 3s infinite ease-in-out;
+  animation: bounceSlow 4s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }
 </style>

@@ -14,23 +14,23 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 const categorias = [
   { 
     title: 'Ilustración Tradicional', 
-    path: '/portafolio/ilustracion-tradicional', 
+    path: '/portafolio/tradicional', 
     icon: Palette, 
-    color: '#FBCFE8', // Rosa
+    color: '#FBCFE8', 
     desc: 'Tinta, acuarela y técnicas manuales.' 
   },
   { 
     title: 'Ilustración Digital', 
-    path: '/portafolio/ilustracion-digital', 
+    path: '/portafolio/digital', 
     icon: PenTool, 
-    color: '#FFFFFF', // Blanco
+    color: '#FFFFFF', 
     desc: 'Arte conceptual y pintura digital.' 
   },
   { 
     title: 'Animación', 
     path: '/portafolio/animacion', 
     icon: Film, 
-    color: '#000000', // Negro
+    color: '#000000', 
     textColor: 'text-white',
     desc: 'Motion graphics y 2D storyboards.' 
   },
@@ -97,7 +97,7 @@ const categorias = [
 
             <div class="flex justify-end">
               <div 
-                class="border-4 border-black p-2 bg-white text-black group-hover:bg-[#FBCFE8] transition-colors"
+                class="border-4 p-2 bg-white text-black group-hover:bg-[#FBCFE8] transition-colors"
                 :class="cat.color === '#000000' ? 'border-white' : 'border-black'"
               >
                 <ArrowUpRight :size="32" />
@@ -120,9 +120,10 @@ const categorias = [
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+/* Fuente Poppins importada globalmente o aquí */
 .font-poppins { font-family: 'Poppins', sans-serif; }
 
+/* Animación de la marquesina */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -132,8 +133,13 @@ const categorias = [
   animation: marquee 20s linear infinite;
 }
 
-/* Para que las tarjetas se vean bien en móviles */
+/* Ajuste para pantallas pequeñas */
 h1 {
   word-break: break-all;
+}
+
+/* Transición suave para los hover */
+.group:hover .shadow-custom {
+  transform: translate(-4px, -4px);
 }
 </style>

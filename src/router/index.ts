@@ -11,6 +11,7 @@ const router = createRouter({
     },
     {
       path: '/portafolio',
+      // Mantenemos el Layout que envuelve las páginas de portafolio
       component: () => import('../pages/portafolio/PortfolioLayout.vue'),
       children: [
         {
@@ -19,18 +20,22 @@ const router = createRouter({
           component: () => import('../pages/portafolio/PortfolioIndex.vue')
         },
         {
-          path: ':category', 
-          name: 'categoria-detalle',
-          component: () => import('../pages/portafolio/IlustracionDigital.vue'),
-          props: true
+          // URL: /portafolio/digital
+          path: 'digital', 
+          name: 'ilustracion-digital',
+          component: () => import('../pages/portafolio/IlustracionDigital.vue')
+        },
+        {
+          // URL: /portafolio/tradicional
+          path: 'tradicional', 
+          name: 'ilustracion-tradicional',
+          component: () => import('../pages/portafolio/IlustracionTradicional.vue')
         }
       ]
     },
-    // --- NUEVA RUTA SOBRE MÍ ---
     {
       path: '/sobre-mi',
       name: 'sobre-mi',
-      // Ajusta la ruta del archivo según dónde lo hayas guardado (ej: pages/sobre-mi/SobreMi.vue)
       component: () => import('../pages/contacto/SobreMi.vue') 
     },
     {

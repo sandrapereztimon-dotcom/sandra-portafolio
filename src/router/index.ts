@@ -21,7 +21,7 @@ const router = createRouter({
         {
           path: ':category', 
           name: 'categoria-detalle',
-          component: () => import('../pages/portafolio/CategoriaProyectos.vue'),
+          component: () => import('../pages/portafolio/IlustracionDigital.vue'),
           props: true
         }
       ]

@@ -11,7 +11,6 @@ const router = createRouter({
     },
     {
       path: '/portafolio',
-      // Mantenemos el Layout que envuelve las páginas de portafolio
       component: () => import('../pages/portafolio/PortfolioLayout.vue'),
       children: [
         {
@@ -20,28 +19,46 @@ const router = createRouter({
           component: () => import('../pages/portafolio/PortfolioIndex.vue')
         },
         {
-          // URL: /portafolio/digital
           path: 'digital', 
           name: 'ilustracion-digital',
           component: () => import('../pages/portafolio/IlustracionDigital.vue')
         },
         {
-          // URL: /portafolio/tradicional
           path: 'tradicional', 
           name: 'ilustracion-tradicional',
           component: () => import('../pages/portafolio/IlustracionTradicional.vue')
-        }
+        },
+        {
+          path: 'editorial', 
+          name: 'diseno-editorial',
+          component: () => import('../pages/portafolio/DisenoEditorial.vue')
+        },
+        {
+          path: 'campanas',
+          name: 'campanas-index',
+          component: () => import('../pages/portafolio/CampanasIndex.vue')
+        },
+        {
+          path: 'campanas/:id',
+          name: 'campana-detalle',
+          component: () => import('../pages/portafolio/CampanaDetalle.vue')
+        },
+        {
+           path: '/portafolio/packaging',
+           name: 'Packaging',
+           component: () => import('../pages/portafolio/Packaging.vue') // Ajusta la ruta según tu carpeta
+        },
+        {
+           path: '/portafolio/packaging/:id', // El :id será 'kaoka' o 'mentecatos'
+           name: 'PackagingDetalle',
+           component: () => import('../pages/portafolio/PackagingDetalle.vue')
+        },
+        {
+  path: '/portafolio/carteles',
+  name: 'Carteles',
+  component: () => import('../pages/portafolio/Carteles.vue')
+}
       ]
-    },
-    {
-      path: '/sobre-mi',
-      name: 'sobre-mi',
-      component: () => import('../pages/contacto/SobreMi.vue') 
-    },
-    {
-      path: '/contacto',
-      name: 'contacto',
-      component: () => import('../pages/contacto/Contacto.vue')
     }
   ]
 })

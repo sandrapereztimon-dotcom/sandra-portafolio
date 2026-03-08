@@ -9,6 +9,18 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+    // --- NUEVAS RUTAS DE CONTACTO (Añadidas aquí) ---
+    {
+      path: '/contacto',
+      name: 'contacto',
+      component: () => import('../pages/contacto/Contacto.vue')
+    },
+    {
+      path: '/sobre-mi',
+      name: 'sobre-mi',
+      component: () => import('../pages/contacto/SobreMi.vue')
+    },
+    // --- PORTAFOLIO ---
     {
       path: '/portafolio',
       component: () => import('../pages/portafolio/PortfolioLayout.vue'),
@@ -44,20 +56,20 @@ const router = createRouter({
           component: () => import('../pages/portafolio/CampanaDetalle.vue')
         },
         {
-           path: '/portafolio/packaging',
+           path: 'packaging', // Quitamos la / inicial porque es un hijo
            name: 'Packaging',
-           component: () => import('../pages/portafolio/Packaging.vue') // Ajusta la ruta según tu carpeta
+           component: () => import('../pages/portafolio/Packaging.vue')
         },
         {
-           path: '/portafolio/packaging/:id', // El :id será 'kaoka' o 'mentecatos'
+           path: 'packaging/:id',
            name: 'PackagingDetalle',
            component: () => import('../pages/portafolio/PackagingDetalle.vue')
         },
         {
-  path: '/portafolio/carteles',
-  name: 'Carteles',
-  component: () => import('../pages/portafolio/Carteles.vue')
-}
+          path: 'carteles',
+          name: 'Carteles',
+          component: () => import('../pages/portafolio/Carteles.vue')
+        }
       ]
     }
   ]

@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Button } from '@/components/ui/button';
-import { Mail, Instagram, Linkedin, ArrowLeft, Send, Star, Circle } from 'lucide-vue-next';
+import { Mail, Instagram, Linkedin, ArrowLeft, Send, Star, Circle, Triangle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
 const formulario = ref({ nombre: '', email: '', mensaje: '' });
@@ -24,73 +24,75 @@ const redes = [
 </script>
 
 <template>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Poppins:wght@800&display=swap" rel="stylesheet">
 
-  <div class="min-h-screen bg-black text-white font-poppins selection:bg-[#FBCFE8] selection:text-black relative overflow-hidden">
+  <div class="min-h-screen bg-black text-white selection:bg-[#FBCFE8] selection:text-black relative overflow-hidden [&_nav_a]:text-black [&_a]:no-underline">
     
     <BarraDeNavegacion />
 
     <div class="fixed inset-0 pointer-events-none z-0">
-      <Star :size="400" class="absolute -bottom-20 -right-20 text-[#FBCFE8]/10 animate-spin-slow fill-current stroke-0" />
-      <Circle :size="150" class="absolute top-1/4 -left-10 text-white/5 fill-current stroke-0" />
+      <Star :size="400" class="absolute -bottom-20 -right-20 text-[#FBCFE8]/10 animate-spin-very-slow fill-current stroke-0" />
+      <Circle :size="250" class="absolute top-1/4 -left-20 text-white/5 animate-levitate fill-current stroke-0" />
+      <Triangle :size="300" class="absolute top-10 right-10 text-[#FBCFE8]/10 animate-spin-slow fill-current stroke-0" />
     </div>
 
     <main class="max-w-6xl mx-auto px-6 py-12 md:py-20 relative z-10 flex flex-col items-center">
       
-      <RouterLink to="/" class="self-start mb-12 flex items-center gap-2 font-black uppercase hover:-translate-x-1 transition-all bg-[#FBCFE8] text-black px-6 py-3 border-4 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] active:shadow-none active:translate-x-1 active:translate-y-1">
+      <RouterLink to="/" class="self-start mb-12 flex items-center gap-2 poppins-bold uppercase hover:bg-white transition-all bg-[#FBCFE8] text-black px-6 py-3 border-4 border-black shadow-[6px_6px_0px_0px_rgba(255,255,255,0.3)] active:shadow-none active:translate-x-1 active:translate-y-1">
         <ArrowLeft :size="20" /> Volver
       </RouterLink>
 
-      <div class="w-full bg-white text-black border-[6px] border-[#FBCFE8] shadow-[20px_20px_0px_0px_rgba(251,207,232,0.3)] p-8 md:p-16">
-        <h2 class="text-6xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12">
-          ¿TRABAJAMOS <br> <span class="bg-black text-[#FBCFE8] px-4 italic">JUNTOS?</span>
+      <div class="w-full bg-white text-black border-[6px] border-[#FBCFE8] shadow-[20px_20px_0px_0px_rgba(251,207,232,0.15)] p-8 md:p-16">
+        
+        <h2 class="text-4xl sm:text-5xl md:text-7xl poppins-bold uppercase leading-none tracking-tighter mb-16">
+          ¿TRABAJAMOS <span class="text-[#FBCFE8] drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">JUNTOS?</span>
         </h2>
 
         <div class="grid lg:grid-cols-2 gap-16">
           
-          <form @submit.prevent="enviarFormulario" class="space-y-8 text-black">
+          <form @submit.prevent="enviarFormulario" class="space-y-8">
             <div class="space-y-3">
-              <label class="font-black uppercase text-sm tracking-widest italic">Tu Nombre</label>
+              <label class="inter-bold uppercase text-xs tracking-widest">Tu Nombre</label>
               <input 
                 v-model="formulario.nombre" 
                 type="text" 
                 required
-                class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none font-bold shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
+                class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none inter-regular shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
                 placeholder="Sandra Pérez..." 
               />
             </div>
 
             <div class="space-y-3">
-              <label class="font-black uppercase text-sm tracking-widest italic">Tu Email</label>
+              <label class="inter-bold uppercase text-xs tracking-widest">Tu Email</label>
               <input 
                 v-model="formulario.email" 
                 type="email" 
                 required
-                class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none font-bold shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
+                class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none inter-regular shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
                 placeholder="hola@tuemail.com" 
               />
             </div>
 
             <div class="space-y-3">
-              <label class="font-black uppercase text-sm tracking-widest italic">¿Qué tienes en mente?</label>
+              <label class="inter-bold uppercase text-xs tracking-widest">¿Qué tienes en mente?</label>
               <textarea 
                 v-model="formulario.mensaje" 
                 rows="4" 
                 required
-                class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none font-bold shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
+                class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none inter-regular shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
                 placeholder="Cuéntame tu proyecto..."
               ></textarea>
             </div>
 
             <Button 
               type="submit" 
-              class="w-full h-20 bg-black text-white text-2xl font-black uppercase border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FBCFE8] hover:text-black transition-all active:translate-y-2 active:shadow-none"
+              class="w-full h-20 bg-black text-white text-2xl poppins-bold uppercase border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FBCFE8] hover:text-black transition-all active:translate-y-2 active:shadow-none"
             >
-              <Send class="mr-3" /> Enviar Mensaje_
+              <Send class="mr-3" /> Enviar
             </Button>
 
             <transition name="fade">
-              <p v-if="enviado" class="text-center font-black uppercase text-black bg-[#FBCFE8] py-4 border-4 border-black">
+              <p v-if="enviado" class="text-center poppins-bold uppercase text-black bg-[#FBCFE8] py-4 border-4 border-black">
                 ¡Recibido! Te responderé pronto.
               </p>
             </transition>
@@ -98,19 +100,17 @@ const redes = [
 
           <div class="flex flex-col text-black">
             <div class="bg-black text-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(251,207,232,1)] mb-12">
-               <p class="text-2xl font-bold italic leading-tight">
+               <p class="text-2xl inter-regular leading-tight">
                 "Si tienes un proyecto en mente o simplemente quieres decir hola, ¡no dudes en escribirme!"
               </p>
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-black uppercase text-xl mb-6 flex items-center gap-2">
-                O búscame en:
-              </h3>
+              <h3 class="poppins-bold uppercase text-lg mb-6">O búscame en:</h3>
               <div class="grid grid-cols-1 gap-4">
                 <a v-for="red in redes" :key="red.nombre" :href="red.url" 
-                  class="flex items-center gap-4 p-5 bg-white border-4 border-black font-black uppercase hover:bg-[#FBCFE8] transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group">
-                  <component :is="red.icon" :size="28" class="group-hover:scale-110 transition-transform" /> 
+                  class="flex items-center gap-4 p-5 bg-white border-4 border-black poppins-bold uppercase hover:bg-[#FBCFE8] transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group">
+                  <component :is="red.icon" :size="28" class="group-hover:rotate-12 transition-transform" /> 
                   <span class="text-lg">{{ red.nombre }}</span>
                 </a>
               </div>
@@ -124,25 +124,21 @@ const redes = [
 </template>
 
 <style scoped>
-.font-poppins { font-family: 'Poppins', sans-serif; }
+.poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
+.inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
+.inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.animate-spin-slow {
-  animation: spin-slow 25s linear infinite;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes levitate {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
 }
 
-input::placeholder, textarea::placeholder {
-  color: rgba(0,0,0,0.3);
-  font-style: italic;
-}
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
+.animate-levitate { animation: levitate 10s ease-in-out infinite; }
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

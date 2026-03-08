@@ -1,58 +1,65 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import { ArrowLeft, X, Calendar, Info, Maximize2, ChevronLeft, ChevronRight, Play } from 'lucide-vue-next';
+import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// 1. Definimos la estructura de un Trabajo para que TypeScript no se queje
-interface ItemCarrusel {
-  type: 'image' | 'video';
-  src: string;
-  label: string;
-}
-
+interface ItemCarrusel { type: 'image' | 'video'; src: string; label: string; }
 interface Trabajo {
   id: string | number;
   titulo: string;
-  fecha: string;
-  descripcion: string;
+  tecnica: string;
   esCarrusel?: boolean;
-  portada?: string; // Solo para proyectos con carrusel
-  src?: string;     // Para imágenes individuales
-  items?: ItemCarrusel[]; // Solo para proyectos con carrusel
+  portada?: string; 
+  src?: string;      
+  items?: ItemCarrusel[]; 
 }
 
-// 2. Aplicamos el tipo a la referencia (puede ser un Trabajo o null)
 const imagenSeleccionada = ref<Trabajo | null>(null);
 const modoZoom = ref(false);
-const indiceCarrusel = ref(0);
+const indicesGrid = ref<Record<string, number>>({});
+const indiceDetalle = ref(0);
+let timerGlobal: number | null = null;
 
-// 3. Lista de trabajos con sus tipos correctos
+// DATOS LIMPIOS: Solo título y técnica
 const trabajos: Trabajo[] = [
   { 
     id: 'animacion-letras', 
     esCarrusel: true,
     portada: '/Img/IlustracionDigital/A.jpg',
-    titulo: 'Animación de Letras', 
-    fecha: '2024', 
-    descripcion: 'Estudio de tipografía dinámica. Incluye el proceso de diseño de las letras A, P y T, y su posterior animación final.',
+    titulo: 'APT', // Nombre corregido
+    tecnica: 'Digital',
     items: [
       { type: 'image', src: '/Img/IlustracionDigital/A.jpg', label: 'Letra A' },
       { type: 'image', src: '/Img/IlustracionDigital/P.jpg', label: 'Letra P' },
       { type: 'image', src: '/Img/IlustracionDigital/T.jpg', label: 'Letra T' },
-      { type: 'video', src: '/Img/IlustracionDigital/Animacion_Letras.mp4', label: 'Animación Final' },
+      { type: 'video', src: '/Img/IlustracionDigital/Animacion_Letras.mp4', label: 'Motion Graphics Final' },
     ]
   },
-  { id: 1, src: '/Img/IlustracionDigital/Comision1.jpeg', titulo: 'Comisión Personaje 1', fecha: '2024', descripcion: 'Diseño de personaje detallado.' },
-  { id: 2, src: '/Img/IlustracionDigital/Comision2.jpeg', titulo: 'Comisión Retrato', fecha: '2024', descripcion: 'Estudio de luz en retrato.' },
-  { id: 3, src: '/Img/IlustracionDigital/Comision3.jpeg', titulo: 'Diseño de Criatura', fecha: '2024', descripcion: 'Fantasía digital.' },
-  { id: 4, src: '/Img/IlustracionDigital/Comision4.jpeg', titulo: 'Escena Nocturna', fecha: '2024', descripcion: 'Ambiente neón.' },
-  { id: 5, src: '/Img/IlustracionDigital/IlustracionSelva.jpg', titulo: 'Expedición Selva', fecha: '2024', descripcion: 'Naturaleza orgánica.' }
+  { id: 1, src: '/Img/IlustracionDigital/Comision1.jpeg', titulo: 'Comisión Voley', tecnica: 'Digital' },
+  { id: 2, src: '/Img/IlustracionDigital/Comision2.jpeg', titulo: 'Comisión Retrato', tecnica: 'Digital' },
+  { id: 3, src: '/Img/IlustracionDigital/Comision3.jpeg', titulo: 'Comisión moto', tecnica: 'Digital' },
+  { id: 4, src: '/Img/IlustracionDigital/Comision4.jpeg', titulo: 'Ilustración ángel', tecnica: 'Digital' },
+  { id: 5, src: '/Img/IlustracionDigital/IlustracionSelva.jpg', titulo: 'Ilustración selva', tecnica: 'Digital' }
 ];
+
+trabajos.forEach(t => { if(t.esCarrusel) indicesGrid.value[t.id] = 0; });
+
+onMounted(() => {
+  timerGlobal = window.setInterval(() => {
+    trabajos.forEach(t => {
+      if (t.esCarrusel && t.items) {
+        indicesGrid.value[t.id] = (indicesGrid.value[t.id] + 1) % t.items.length;
+      }
+    });
+  }, 2500); 
+});
+
+onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
 const abrirDetalle = (trabajo: Trabajo) => {
   imagenSeleccionada.value = trabajo;
-  indiceCarrusel.value = 0;
+  indiceDetalle.value = trabajo.esCarrusel ? indicesGrid.value[trabajo.id] : 0;
 };
 
 const cerrarDetalle = () => {
@@ -60,46 +67,48 @@ const cerrarDetalle = () => {
   modoZoom.value = false;
 };
 
-const siguienteSlide = () => {
+const cambiarSlide = (dir: number) => {
   if (imagenSeleccionada.value?.items) {
-    indiceCarrusel.value = (indiceCarrusel.value + 1) % imagenSeleccionada.value.items.length;
-  }
-};
-
-const anteriorSlide = () => {
-  if (imagenSeleccionada.value?.items) {
-    indiceCarrusel.value = (indiceCarrusel.value - 1 + imagenSeleccionada.value.items.length) % imagenSeleccionada.value.items.length;
+    const total = imagenSeleccionada.value.items.length;
+    indiceDetalle.value = (indiceDetalle.value + dir + total) % total;
   }
 };
 </script>
 
 <template>
-  <div class="min-h-screen bg-white text-black font-poppins pb-20">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Poppins:wght@800&display=swap" rel="stylesheet">
+
+  <div class="min-h-screen bg-white text-black font-poppins selection:bg-[#FBCFE8] relative overflow-x-hidden pb-20">
     <BarraDeNavegacion />
 
-    <header class="max-w-7xl mx-auto px-6 pt-12">
-      <RouterLink to="/portafolio" class="inline-flex items-center gap-2 font-black uppercase mb-8 hover:-translate-x-1 transition-all bg-[#FBCFE8] px-4 py-2 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-        <ArrowLeft :size="20" /> Volver
-      </RouterLink>
-      <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter italic mb-12">
-        DIGITAL<span class="text-[#FBCFE8] not-italic">_ART</span>
-      </h1>
-    </header>
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div class="absolute inset-0 bg-[#FBCFE8]/10"></div>
+      <Star :size="400" class="absolute -top-20 -right-20 text-[#FBCFE8]/30 animate-spin-very-slow fill-current stroke-0" />
+      <Circle :size="150" class="absolute bottom-10 left-10 text-black/5 fill-current stroke-0" />
+    </div>
 
-    <main class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      <div 
-        v-for="item in trabajos" 
-        :key="item.id" 
-        @click="abrirDetalle(item)" 
-        class="group cursor-pointer"
-      >
-        <div class="border-4 border-black bg-white overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(251,207,232,1)] group-hover:-translate-y-1 transition-all duration-300">
-          <img :src="item.portada || item.src" class="w-full h-80 object-cover" />
+    <main class="max-w-7xl mx-auto px-6 pt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
+      <div v-for="item in trabajos" :key="item.id" @click="abrirDetalle(item)" class="group cursor-pointer">
+        <div class="border-4 border-black bg-neutral-900 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(251,207,232,1)] group-hover:-translate-y-2 group-hover:scale-[1.03] transition-all duration-500 ease-out overflow-hidden">
           
-          <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center">
-            <div class="flex flex-col">
-              <span class="font-black uppercase text-sm italic">{{ item.titulo }}</span>
-              <span v-if="item.esCarrusel" class="text-[10px] font-bold text-[#EE6055] uppercase tracking-tighter">Proyecto Multi-formato</span>
+          <div class="h-80 w-full relative overflow-hidden bg-neutral-100">
+            <template v-if="item.esCarrusel && item.items">
+              <transition-group name="slide-fade">
+                <div v-for="(img, idx) in item.items" v-show="indicesGrid[item.id] === idx" :key="img.src" class="absolute inset-0 w-full h-full flex items-center justify-center">
+                  <img v-if="img.type === 'image'" :src="img.src" class="w-full h-full object-cover object-center" />
+                  <video v-else :src="img.src" autoplay muted loop class="w-full h-full object-cover object-center"></video>
+                </div>
+              </transition-group>
+            </template>
+            <template v-else>
+              <img :src="item.src" class="w-full h-full object-cover object-center" />
+            </template>
+          </div>
+
+          <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center relative z-10">
+            <div class="flex flex-col gap-1">
+              <span class="poppins-bold uppercase text-xs leading-none">{{ item.titulo }}</span>
+              <span class="inter-regular text-[10px] text-gray-700 uppercase tracking-tighter leading-none">Técnica: {{ item.tecnica }}</span>
             </div>
             <div class="bg-black text-white p-1">
                <component :is="item.esCarrusel ? Play : Maximize2" :size="16" />
@@ -111,60 +120,66 @@ const anteriorSlide = () => {
 
     <transition name="fade">
       <div v-if="imagenSeleccionada" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" @click="cerrarDetalle"></div>
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="cerrarDetalle"></div>
         
-        <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
+        <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
           <button @click="cerrarDetalle" class="absolute top-4 right-4 z-30 bg-[#FBCFE8] border-4 border-black p-1 hover:bg-black hover:text-white transition-colors">
             <X :size="24" />
           </button>
 
-          <div class="md:w-3/5 relative bg-neutral-100 flex items-center justify-center">
-            
+          <div class="md:w-3/5 relative bg-neutral-950 flex items-center justify-center p-2 overflow-hidden">
             <template v-if="imagenSeleccionada.esCarrusel && imagenSeleccionada.items">
-              <div class="w-full h-full flex items-center justify-center p-4">
-                <template v-if="imagenSeleccionada.items[indiceCarrusel].type === 'image'">
-                  <img :src="imagenSeleccionada.items[indiceCarrusel].src" class="max-w-full max-h-full object-contain" />
+              <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-sm text-[#FBCFE8] px-3 py-1 text-xs poppins-bold uppercase tracking-widest border-2 border-black/30 z-10">
+                {{ indiceDetalle + 1 }} / {{ imagenSeleccionada.items.length }}
+              </div>
+
+              <div class="w-full h-full flex items-center justify-center">
+                <template v-if="imagenSeleccionada.items[indiceDetalle].type === 'image'">
+                  <img :src="imagenSeleccionada.items[indiceDetalle].src" class="max-w-full max-h-[70vh] object-contain shadow-2xl cursor-zoom-in" @click="modoZoom = true" />
                 </template>
                 <template v-else>
-                  <video :src="imagenSeleccionada.items[indiceCarrusel].src" controls class="max-w-full max-h-full border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]"></video>
+                  <video :src="imagenSeleccionada.items[indiceDetalle].src" controls class="max-w-full max-h-[70vh] border-4 border-black shadow-[10px_10px_0px_rgba(0,0,0,1)]"></video>
                 </template>
               </div>
-              
-              <button @click="anteriorSlide" class="absolute left-2 bg-white border-2 border-black p-1 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-none transition-all hover:bg-[#FBCFE8]">
+
+              <button @click.stop="cambiarSlide(-1)" class="absolute left-4 bg-white border-4 border-black p-2 hover:bg-[#FBCFE8] transition-all">
                 <ChevronLeft :size="24" />
               </button>
-              <button @click="siguienteSlide" class="absolute right-2 bg-white border-2 border-black p-1 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-none transition-all hover:bg-[#FBCFE8]">
+              <button @click.stop="cambiarSlide(1)" class="absolute right-4 bg-white border-4 border-black p-2 hover:bg-[#FBCFE8] transition-all">
                 <ChevronRight :size="24" />
               </button>
-
-              <div class="absolute bottom-4 bg-black text-white px-3 py-1 text-xs font-black uppercase tracking-widest italic shadow-[4px_4px_0px_rgba(251,207,232,1)]">
-                {{ imagenSeleccionada.items[indiceCarrusel].label }}
-              </div>
             </template>
 
             <template v-else>
-              <img :src="imagenSeleccionada.src" class="w-full h-full object-contain cursor-zoom-in" @click="modoZoom = true" />
+              <img :src="imagenSeleccionada.src" class="max-w-full max-h-[70vh] object-contain cursor-zoom-in" @click="modoZoom = true" />
             </template>
           </div>
 
-          <div class="md:w-2/5 p-8 flex flex-col justify-center gap-6 overflow-y-auto">
-            <h2 class="text-4xl font-black uppercase tracking-tighter leading-none italic border-l-8 border-[#FBCFE8] pl-4">
-              {{ imagenSeleccionada.titulo }}
-            </h2>
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 font-black uppercase text-[10px] bg-black text-[#FBCFE8] px-2 py-1 w-fit">
-                <Calendar :size="14" /> {{ imagenSeleccionada.fecha }}
-              </div>
-              <p class="font-bold text-base leading-snug">{{ imagenSeleccionada.descripcion }}</p>
-            </div>
-            <button @click="cerrarDetalle" class="mt-4 bg-white text-black font-black uppercase py-4 border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FBCFE8] transition-all">Cerrar</button>
+          <div class="md:w-2/5 p-10 flex flex-col justify-center bg-white border-l-4 border-black">
+            <h2 class="text-4xl poppins-bold uppercase leading-tight mb-4 tracking-tighter">{{ imagenSeleccionada.titulo }}</h2>
+            <p class="inter-bold text-sm uppercase tracking-wider text-black">Técnica: {{ imagenSeleccionada.tecnica }}</p>
           </div>
         </div>
 
         <div v-if="modoZoom" class="fixed inset-0 z-[210] bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
-            <img :src="imagenSeleccionada?.src" class="max-w-full max-h-full object-contain shadow-[0px_0px_50px_rgba(251,207,232,0.3)]" />
+            <img :src="imagenSeleccionada.esCarrusel && imagenSeleccionada.items ? imagenSeleccionada.items[indiceDetalle].src : imagenSeleccionada.src" class="max-w-full max-h-full object-contain" />
         </div>
       </div>
     </transition>
   </div>
 </template>
+
+<style scoped>
+.poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
+.inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
+.inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
+.slide-fade-enter-active, .slide-fade-leave-active { transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
+.slide-fade-enter-from { transform: translateX(100%); }
+.slide-fade-leave-to { transform: translateX(-100%); }
+.animate-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes pop { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.fade-enter-active, .fade-leave-active { transition: opacity 0.4s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+@keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
+</style>

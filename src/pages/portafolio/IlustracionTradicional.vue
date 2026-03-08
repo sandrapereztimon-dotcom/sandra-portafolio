@@ -1,87 +1,89 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import { ArrowLeft, X, Calendar, Info, Maximize2, ChevronLeft, ChevronRight, Play } from 'lucide-vue-next';
+import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// 1. Interfaces para que TypeScript reconozca las propiedades
-interface ItemCarrusel {
-  type: 'image';
-  src: string;
-  label: string;
-}
-
+interface ItemCarrusel { type: 'image'; src: string; label: string; }
 interface Trabajo {
   id: string | number;
   titulo: string;
-  fecha: string;
-  descripcion: string;
+  tecnica: string;
   esCarrusel?: boolean;
   portada?: string; 
-  src?: string;     
+  src?: string;      
   items?: ItemCarrusel[]; 
 }
 
-// 2. Estado del componente
 const imagenSeleccionada = ref<Trabajo | null>(null);
 const modoZoom = ref(false);
-const indiceCarrusel = ref(0);
+const indicesGrid = ref<Record<string, number>>({});
+const indiceDetalle = ref(0);
+let timerGlobal: number | null = null;
 
-// 3. Listado de trabajos (Agrupados y Solitarios)
+// DATOS LIMPIOS: Solo título y técnica
 const trabajos: Trabajo[] = [
   { 
     id: 'proyecto-litografia', 
     esCarrusel: true,
     portada: '/Img/IlustracionTradicional/Litografia1.jpg',
-    titulo: 'Serie Litografía', 
-    fecha: '2023', 
-    descripcion: 'Exploración de técnicas de grabado y estampación tradicional sobre piedra.',
+    titulo: 'Estampación caballo y gallina', 
+    tecnica: 'Litografía',
     items: [
       { type: 'image', src: '/Img/IlustracionTradicional/Litografia1.jpg', label: 'Estampa I' },
       { type: 'image', src: '/Img/IlustracionTradicional/Litografia2.jpg', label: 'Estampa II' },
     ]
   },
-  { 
-    id: 'proyecto-comic', 
-    esCarrusel: true,
-    portada: '/Img/IlustracionTradicional/ComicColor.jpg',
-    titulo: 'Proceso de Cómic', 
-    fecha: '2023', 
-    descripcion: 'Página de cómic original: desde el entintado manual en blanco y negro hasta la aplicación de color.',
-    items: [
-      { type: 'image', src: '/Img/IlustracionTradicional/ComicBN.jpg', label: 'Tinta B/N' },
-      { type: 'image', src: '/Img/IlustracionTradicional/ComicColor.jpg', label: 'Color Final' },
-    ]
-  },
+  { id: 1, src: '/Img/IlustracionTradicional/ArbolAcuarela.jpg', titulo: 'Árbol místico', tecnica: 'Acuarela' },
+  { id: 2, src: '/Img/IlustracionTradicional/Caballo.jpg', titulo: 'Caballo Carrusel', tecnica: 'Tinta china' },
+  { id: 3, src: '/Img/IlustracionTradicional/Calavera.jpg', titulo: 'Calavera', tecnica: 'Grafito' },
   { 
     id: 'proyecto-libro', 
     esCarrusel: true,
     portada: '/Img/IlustracionTradicional/LibroPortada.jpg',
-    titulo: 'Diseño Editorial: Libro', 
-    fecha: '2024', 
-    descripcion: 'Proyecto integral de ilustración editorial que incluye portada, diseño de guardas e ilustraciones interiores.',
+    titulo: 'Alicia en el país de las maravillas', 
+    tecnica: 'Gouache + lápiz de color', 
     items: [
       { type: 'image', src: '/Img/IlustracionTradicional/LibroPortada.jpg', label: 'Portada' },
-      { type: 'image', src: '/Img/IlustracionTradicional/LibroPagina.jpg', label: 'Página Ilustrada' },
+      { type: 'image', src: '/Img/IlustracionTradicional/LibroPagina.jpg', label: 'Interior' },
       { type: 'image', src: '/Img/IlustracionTradicional/DoblePaginaLibro.jpg', label: 'Doble Página' },
-      { type: 'image', src: '/Img/IlustracionTradicional/GuardasLibro.jpg', label: 'Diseño de Guardas' },
+      { type: 'image', src: '/Img/IlustracionTradicional/GuardasLibro.jpg', label: 'Guardas' },
     ]
   },
-  { id: 1, src: '/Img/IlustracionTradicional/ArbolAcuarela.jpg', titulo: 'Árbol en Acuarela', fecha: '2023', descripcion: 'Estudio de texturas naturales y capas de color.' },
-  { id: 2, src: '/Img/IlustracionTradicional/Caballo.jpg', titulo: 'Estudio de Caballo', fecha: '2023', descripcion: 'Dibujo anatómico detallado.' },
-  { id: 3, src: '/Img/IlustracionTradicional/Calavera.jpg', titulo: 'Bodegón Calavera', fecha: '2023', descripcion: 'Estudio de claroscuro y volúmenes.' },
-  { id: 4, src: '/Img/IlustracionTradicional/Cisne.jpg', titulo: 'Estudio de Cisne', fecha: '2023', descripcion: 'Dibujo enfocado en la forma y el movimiento.' },
-  { id: 5, src: '/Img/IlustracionTradicional/EstatuaSelva.jpg', titulo: 'Estatua Selva', fecha: '2024', descripcion: 'Ilustración que combina elementos arquitectónicos y orgánicos.' },
-  { id: 6, src: '/Img/IlustracionTradicional/Girasoles.jpg', titulo: 'Girasoles', fecha: '2023', descripcion: 'Práctica de color vibrante y luz natural.' },
-  { id: 7, src: '/Img/IlustracionTradicional/SorollaRecreacion.jpg', titulo: 'Homenaje a Sorolla', fecha: '2024', descripcion: 'Estudio de la luz y pincelada inspirada en el maestro Sorolla.' },
-  { id: 8, src: '/Img/IlustracionTradicional/MujerAGrafito.jpg', titulo: 'Retrato Femenino', fecha: '2023', descripcion: 'Técnica de grafito sobre papel, centrada en el detalle del rostro.' },
-  { id: 9, src: '/Img/IlustracionTradicional/Indio.jpg', titulo: 'Retrato Indio', fecha: '2023', descripcion: 'Dibujo con fuerte contraste y enfoque en la expresión.' },
+  { id: 5, src: '/Img/IlustracionTradicional/EstatuaSelva.jpg', titulo: 'Estatua en la selva', tecnica: 'Rotuladores de alcohol' },
+  { id: 7, src: '/Img/IlustracionTradicional/SorollaRecreacion.jpg', titulo: 'Reinterpretación sorolla', tecnica: 'Tres tizas' },
+  { id: 8, src: '/Img/IlustracionTradicional/MujerAGrafito.jpg', titulo: 'Mujer', tecnica: 'Grafito' },
+  { 
+    id: 'proyecto-comic', 
+    esCarrusel: true,
+    portada: '/Img/IlustracionTradicional/ComicColor.jpg',
+    titulo: 'Cómic', 
+    tecnica: 'Delineado tradicional + color en digital', 
+    items: [
+      { type: 'image', src: '/Img/IlustracionTradicional/ComicBN.jpg', label: 'B/N' },
+      { type: 'image', src: '/Img/IlustracionTradicional/ComicColor.jpg', label: 'Color Final' },
+    ]
+  }
 ];
 
-// 4. Funciones de Navegación
+trabajos.forEach(t => { if(t.esCarrusel) indicesGrid.value[t.id] = 0; });
+
+onMounted(() => {
+  timerGlobal = window.setInterval(() => {
+    trabajos.forEach(t => {
+      if (t.esCarrusel && t.items) {
+        indicesGrid.value[t.id] = (indicesGrid.value[t.id] + 1) % t.items.length;
+      }
+    });
+  }, 2500); 
+});
+
+onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
+
 const abrirDetalle = (trabajo: Trabajo) => {
   imagenSeleccionada.value = trabajo;
-  indiceCarrusel.value = 0;
+  // Se fija el índice para que no se mueva solo en el modal
+  indiceDetalle.value = trabajo.esCarrusel ? indicesGrid.value[trabajo.id] : 0;
 };
 
 const cerrarDetalle = () => {
@@ -89,46 +91,60 @@ const cerrarDetalle = () => {
   modoZoom.value = false;
 };
 
-const siguienteSlide = () => {
+const cambiarSlide = (dir: number) => {
   if (imagenSeleccionada.value?.items) {
-    indiceCarrusel.value = (indiceCarrusel.value + 1) % imagenSeleccionada.value.items.length;
-  }
-};
-
-const anteriorSlide = () => {
-  if (imagenSeleccionada.value?.items) {
-    indiceCarrusel.value = (indiceCarrusel.value - 1 + imagenSeleccionada.value.items.length) % imagenSeleccionada.value.items.length;
+    const total = imagenSeleccionada.value.items.length;
+    indiceDetalle.value = (indiceDetalle.value + dir + total) % total;
   }
 };
 </script>
 
 <template>
-  <div class="min-h-screen bg-white text-black font-poppins pb-20">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Poppins:wght@800&display=swap" rel="stylesheet">
+
+  <div class="min-h-screen bg-white text-black font-poppins selection:bg-[#FBCFE8] relative overflow-x-hidden pb-20">
     <BarraDeNavegacion />
 
-    <header class="max-w-7xl mx-auto px-6 pt-12">
-      <RouterLink to="/portafolio" class="inline-flex items-center gap-2 font-black uppercase mb-8 hover:-translate-x-1 transition-all bg-[#FBCFE8] px-4 py-2 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-        <ArrowLeft :size="20" /> Volver al Portafolio
-      </RouterLink>
-      <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter italic mb-12">
-        TRADITIONAL<span class="text-[#FBCFE8] not-italic">_ART</span>
-      </h1>
-    </header>
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <Star :size="400" class="absolute -top-20 -right-20 text-black/5 animate-spin-very-slow fill-current stroke-0" />
+      <Circle :size="150" class="absolute bottom-10 left-10 text-black/5 fill-current stroke-0" />
+    </div>
 
-    <main class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <main class="max-w-7xl mx-auto px-6 pt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
       <div 
         v-for="item in trabajos" 
         :key="item.id" 
         @click="abrirDetalle(item)" 
         class="group cursor-pointer"
       >
-        <div class="border-4 border-black bg-white overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(251,207,232,1)] group-hover:-translate-y-1 transition-all duration-300">
-          <img :src="item.portada || item.src" class="w-full h-80 object-cover" />
+        <div class="border-4 border-black bg-neutral-900 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+                    group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] 
+                    group-hover:-translate-y-2 group-hover:scale-[1.03] 
+                    transition-all duration-500 ease-out overflow-hidden relative">
           
-          <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center">
-            <div class="flex flex-col">
-              <span class="font-black uppercase text-sm italic">{{ item.titulo }}</span>
-              <span v-if="item.esCarrusel" class="text-[10px] font-bold text-[#EE6055] uppercase tracking-tighter">Serie / Proyecto</span>
+          <div class="h-80 w-full relative overflow-hidden bg-neutral-100">
+            <template v-if="item.esCarrusel && item.items">
+              <transition-group name="slide-fade">
+                <img 
+                  v-for="(img, idx) in item.items" 
+                  v-show="indicesGrid[item.id] === idx"
+                  :key="img.src"
+                  :src="img.src" 
+                  class="absolute inset-0 w-full h-full object-cover object-center"
+                />
+              </transition-group>
+            </template>
+            <template v-else>
+              <img :src="item.src" class="w-full h-full object-cover object-center" />
+            </template>
+          </div>
+          
+          <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center relative z-10">
+            <div class="flex flex-col gap-1">
+              <span class="poppins-bold uppercase text-xs leading-none">{{ item.titulo }}</span>
+              <span class="inter-regular text-[10px] text-gray-700 uppercase tracking-tighter leading-none">
+                Técnica: {{ item.tecnica }}
+              </span>
             </div>
             <div class="bg-black text-white p-1">
                <component :is="item.esCarrusel ? Play : Maximize2" :size="16" />
@@ -140,52 +156,42 @@ const anteriorSlide = () => {
 
     <transition name="fade">
       <div v-if="imagenSeleccionada" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" @click="cerrarDetalle"></div>
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="cerrarDetalle"></div>
         
-        <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
-          <button @click="cerrarDetalle" class="absolute top-4 right-4 z-30 bg-[#FBCFE8] border-4 border-black p-1 hover:bg-black hover:text-white transition-colors">
+        <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
+          <button @click="cerrarDetalle" class="absolute top-4 right-4 z-30 bg-white border-4 border-black p-1 hover:bg-black hover:text-white transition-colors">
             <X :size="24" />
           </button>
 
-          <div class="md:w-3/5 relative bg-neutral-100 flex items-center justify-center">
+          <div class="md:w-3/5 relative bg-neutral-950 flex items-center justify-center p-2 overflow-hidden">
             <template v-if="imagenSeleccionada.esCarrusel && imagenSeleccionada.items">
-              <div class="w-full h-full flex items-center justify-center p-4">
-                <img :src="imagenSeleccionada.items[indiceCarrusel].src" class="max-w-full max-h-full object-contain" />
-              </div>
+              <img :src="imagenSeleccionada.items[indiceDetalle].src" class="max-w-full max-h-[70vh] object-contain shadow-2xl cursor-zoom-in" @click="modoZoom = true" />
               
-              <button @click="anteriorSlide" class="absolute left-2 bg-white border-2 border-black p-1 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-none transition-all hover:bg-[#FBCFE8]">
+              <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 text-xs poppins-bold uppercase tracking-widest border-2 border-white/20 z-10">
+                {{ indiceDetalle + 1 }} / {{ imagenSeleccionada.items.length }}
+              </div>
+
+              <button @click.stop="cambiarSlide(-1)" class="absolute left-4 bg-white border-4 border-black p-2 hover:bg-black hover:text-white transition-all">
                 <ChevronLeft :size="24" />
               </button>
-              <button @click="siguienteSlide" class="absolute right-2 bg-white border-2 border-black p-1 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:shadow-none transition-all hover:bg-[#FBCFE8]">
+              <button @click.stop="cambiarSlide(1)" class="absolute right-4 bg-white border-4 border-black p-2 hover:bg-black hover:text-white transition-all">
                 <ChevronRight :size="24" />
               </button>
-
-              <div class="absolute bottom-4 bg-black text-white px-3 py-1 text-xs font-black uppercase tracking-widest italic shadow-[4px_4px_0px_rgba(251,207,232,1)]">
-                {{ imagenSeleccionada.items[indiceCarrusel].label }}
-              </div>
             </template>
 
             <template v-else>
-              <img :src="imagenSeleccionada.src" class="w-full h-full object-contain cursor-zoom-in" @click="modoZoom = true" />
+              <img :src="imagenSeleccionada.src" class="max-w-full max-h-[70vh] object-contain cursor-zoom-in" @click="modoZoom = true" />
             </template>
           </div>
 
-          <div class="md:w-2/5 p-8 flex flex-col justify-center gap-6 overflow-y-auto">
-            <h2 class="text-4xl font-black uppercase tracking-tighter leading-none italic border-l-8 border-[#FBCFE8] pl-4">
-              {{ imagenSeleccionada.titulo }}
-            </h2>
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 font-black uppercase text-[10px] bg-black text-[#FBCFE8] px-2 py-1 w-fit">
-                <Calendar :size="14" /> {{ imagenSeleccionada.fecha }}
-              </div>
-              <p class="font-bold text-base leading-snug">{{ imagenSeleccionada.descripcion }}</p>
-            </div>
-            <button @click="cerrarDetalle" class="mt-4 bg-white text-black font-black uppercase py-4 border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FBCFE8] transition-all">Cerrar</button>
+          <div class="md:w-2/5 p-10 flex flex-col justify-center bg-white border-l-4 border-black">
+            <h2 class="text-4xl poppins-bold uppercase leading-tight mb-4 tracking-tighter">{{ imagenSeleccionada.titulo }}</h2>
+            <p class="inter-bold text-sm uppercase tracking-wider text-black">Técnica: {{ imagenSeleccionada.tecnica }}</p>
           </div>
         </div>
 
         <div v-if="modoZoom" class="fixed inset-0 z-[210] bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
-            <img :src="imagenSeleccionada?.src" class="max-w-full max-h-full object-contain shadow-[0px_0px_50px_rgba(251,207,232,0.3)]" />
+            <img :src="imagenSeleccionada.esCarrusel && imagenSeleccionada.items ? imagenSeleccionada.items[indiceDetalle].src : imagenSeleccionada.src" class="max-w-full max-h-full object-contain" />
         </div>
       </div>
     </transition>
@@ -193,9 +199,17 @@ const anteriorSlide = () => {
 </template>
 
 <style scoped>
-.font-poppins { font-family: 'Poppins', sans-serif; }
+/* Estilos idénticos para mantener la consistencia */
+.poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
+.inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
+.inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
+.slide-fade-enter-active, .slide-fade-leave-active { transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
+.slide-fade-enter-from { transform: translateX(100%); }
+.slide-fade-leave-to { transform: translateX(-100%); }
 .animate-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-@keyframes pop { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-.fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+@keyframes pop { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.fade-enter-active, .fade-leave-active { transition: opacity 0.4s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
+@keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
 </style>

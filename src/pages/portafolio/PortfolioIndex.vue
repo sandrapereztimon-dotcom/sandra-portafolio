@@ -81,7 +81,7 @@ const categorias = [
         >
           <div 
             :style="{ backgroundColor: cat.color }" 
-            class="h-full border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] group-hover:-translate-x-1 group-hover:-translate-y-1 transition-all min-h-[300px] flex flex-col justify-between"
+            class="h-full border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] group-hover:-translate-x-1 group-hover:-translate-y-1 transition-all min-h-75 flex flex-col justify-between"
           >
             <div>
               <component :is="cat.icon" :size="40" class="mb-6 stroke-[2.5px]" />

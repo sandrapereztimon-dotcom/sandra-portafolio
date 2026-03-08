@@ -26,7 +26,7 @@ import { Button } from '@/components/ui/button';
       
       <div class="w-full md:w-1/2 flex justify-center md:justify-start mb-12 md:mb-0">
         <RouterLink to="/sobre-mi" class="relative group">
-          <div class="w-72 h-72 md:w-[420px] md:h-[480px] bg-white border-[8px] border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-700 group-hover:shadow-none group-hover:translate-x-2 group-hover:translate-y-2">
+          <div class="w-72 h-72 md:w-105 md:h-120 bg-white border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] overflow-hidden transition-all duration-700 group-hover:shadow-none group-hover:translate-x-2 group-hover:translate-y-2">
             <img src="/Img/Contacto/FotoPortafolio.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
           </div>
           <div class="absolute -top-6 -left-6 bg-black text-white inter-bold px-6 py-3 border-4 border-white -rotate-12 uppercase text-lg z-20 group-hover:bg-[#FBCFE8] group-hover:text-black transition-colors shadow-xl">
@@ -36,7 +36,7 @@ import { Button } from '@/components/ui/button';
       </div>
 
       <div class="w-full md:w-1/2 text-black md:pl-10 flex flex-col justify-center">
-        <h1 class="text-5xl sm:text-6xl lg:text-[5rem] poppins-bold leading-[0.95] tracking-tighter uppercase mb-4 break-words">
+        <h1 class="text-5xl sm:text-6xl lg:text-[5rem] poppins-bold leading-[0.95] tracking-tighter uppercase mb-4 wrap-break-word">
           PORTAFOLIO <br> 
           CREATIVO <span class="inter-light tracking-normal lowercase text-[0.9em]">2026</span>
         </h1>

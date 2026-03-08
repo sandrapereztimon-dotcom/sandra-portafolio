@@ -1,19 +1,36 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRoute, RouterLink } from 'vue-router'; // Añadido RouterLink
+import { useRoute, RouterLink } from 'vue-router';
 import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle, ArrowLeft } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
 const route = useRoute();
 const proyectoId = route.params.id as string;
 
-const imagenSeleccionada = ref<any | null>(null);
+// --- 1. INTERFACES (Para que TS sepa qué contienen los objetos) ---
+interface GaleriaItem {
+  id: string;
+  titulo: string;
+  tecnica: string;
+  fotos: string[];
+}
+
+interface Proyecto {
+  titulo: string;
+  descripcion: string;
+  galeria: GaleriaItem[];
+}
+
+// --- 2. REFS TIPADOS ---
+// Definimos que imagenSeleccionada puede ser un GaleriaItem o null
+const imagenSeleccionada = ref<GaleriaItem | null>(null);
 const modoZoom = ref(false);
 const indicesGrid = ref<Record<string, number>>({});
 const indiceDetalle = ref(0);
 let timerGlobal: number | null = null;
 
-const proyectosData: any = {
+// Tipamos el objeto global de datos
+const proyectosData: Record<string, Proyecto> = {
   'kaoka': {
     titulo: 'KAOKA',
     descripcion: 'Identidad visual y packaging para una línea de chocolates.',
@@ -39,8 +56,9 @@ const proyectosData: any = {
 
 const data = computed(() => proyectosData[proyectoId]);
 
+// Inicialización segura de índices
 if (data.value) {
-  data.value.galeria.forEach((item: any) => {
+  data.value.galeria.forEach((item) => {
     if (item.fotos.length > 1) indicesGrid.value[item.id] = 0;
   });
 }
@@ -48,9 +66,11 @@ if (data.value) {
 onMounted(() => {
   timerGlobal = window.setInterval(() => {
     if (data.value) {
-      data.value.galeria.forEach((item: any) => {
+      data.value.galeria.forEach((item) => {
         if (item.fotos.length > 1) {
-          indicesGrid.value[item.id] = (indicesGrid.value[item.id] + 1) % item.fotos.length;
+          // Usamos || 0 para asegurar que siempre haya un número
+          const currentIdx = indicesGrid.value[item.id] ?? 0;
+          indicesGrid.value[item.id] = (currentIdx + 1) % item.fotos.length;
         }
       });
     }
@@ -59,9 +79,10 @@ onMounted(() => {
 
 onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
-const abrirDetalle = (item: any) => {
+const abrirDetalle = (item: GaleriaItem) => {
   imagenSeleccionada.value = item;
-  indiceDetalle.value = item.fotos.length > 1 ? indicesGrid.value[item.id] : 0;
+  // Acceso seguro al índice del grid
+  indiceDetalle.value = item.fotos.length > 1 ? (indicesGrid.value[item.id] ?? 0) : 0;
 };
 
 const cerrarDetalle = () => {
@@ -118,7 +139,7 @@ const cambiarSlide = (dir: number) => {
           <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center relative z-10">
             <div class="flex flex-col">
               <span class="poppins-bold uppercase text-[11px] leading-tight mb-0.5 tracking-tight">{{ item.titulo }}</span>
-              <span class="inter-regular text-[9px] text-gray-500 uppercase tracking-widest">{{ item.tecnica || 'Detalle' }}</span>
+              <span class="inter-regular text-[9px] text-gray-500 uppercase tracking-widest">{{ item.tecnica }}</span>
             </div>
             <div class="bg-black text-white p-1">
               <component :is="item.fotos.length > 1 ? Play : Maximize2" :size="14" />
@@ -129,14 +150,16 @@ const cambiarSlide = (dir: number) => {
     </main>
 
     <transition name="fade">
-      <div v-if="imagenSeleccionada" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
+      <div v-if="imagenSeleccionada" class="fixed inset-0 z-200 flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="cerrarDetalle"></div>
+        
         <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
           <button @click="cerrarDetalle" class="absolute top-4 right-4 z-30 bg-[#FBCFE8] border-4 border-black p-1 hover:bg-black hover:text-white transition-colors">
             <X :size="24" />
           </button>
+          
           <div class="md:w-3/5 relative bg-neutral-950 flex items-center justify-center p-4 overflow-hidden">
-            <template v-if="imagenSeleccionada.fotos.length > 1">
+            <template v-if="imagenSeleccionada.fotos && imagenSeleccionada.fotos.length > 1">
               <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-sm text-[#FBCFE8] px-3 py-1 text-xs poppins-bold uppercase z-10">
                 {{ indiceDetalle + 1 }} / {{ imagenSeleccionada.fotos.length }}
               </div>
@@ -144,17 +167,19 @@ const cambiarSlide = (dir: number) => {
               <button @click.stop="cambiarSlide(-1)" class="absolute left-4 bg-white border-4 border-black p-2 hover:bg-[#FBCFE8] transition-all"><ChevronLeft :size="24" /></button>
               <button @click.stop="cambiarSlide(1)" class="absolute right-4 bg-white border-4 border-black p-2 hover:bg-[#FBCFE8] transition-all"><ChevronRight :size="24" /></button>
             </template>
-            <template v-else>
+            <template v-else-if="imagenSeleccionada.fotos">
               <img :src="imagenSeleccionada.fotos[0]" class="max-w-full max-h-[70vh] object-contain cursor-zoom-in" @click="modoZoom = true" />
             </template>
           </div>
+          
           <div class="md:w-2/5 p-10 flex flex-col justify-center bg-white border-l-4 border-black">
-            <h2 class="text-3xl md:text-4xl poppins-bold uppercase leading-tight mb-4 tracking-tighter">{{ imagenSeleccionada.titulo }}</h2>
-            <p class="inter-bold text-sm uppercase tracking-wider text-black">Técnica: {{ imagenSeleccionada.tecnica || 'Diseño' }}</p>
+            <h2 class="text-3xl md:text-4xl poppins-bold uppercase leading-tight mb-4 tracking-tighter">{{ imagenSeleccionada?.titulo }}</h2>
+            <p class="inter-bold text-sm uppercase tracking-wider text-black">Técnica: {{ imagenSeleccionada?.tecnica || 'Diseño' }}</p>
           </div>
         </div>
-        <div v-if="modoZoom" class="fixed inset-0 z-[210] bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
-            <img :src="imagenSeleccionada.fotos[indiceDetalle]" class="max-w-full max-h-full object-contain" />
+
+        <div v-if="modoZoom" class="fixed inset-0 z-210 bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
+            <img v-if="imagenSeleccionada?.fotos" :src="imagenSeleccionada.fotos[indiceDetalle]" class="max-w-full max-h-full object-contain" />
         </div>
       </div>
     </transition>
@@ -162,6 +187,7 @@ const cambiarSlide = (dir: number) => {
 </template>
 
 <style scoped>
+/* (Estilos se mantienen iguales) */
 .poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-medium { font-family: 'Inter', sans-serif; font-weight: 500; }

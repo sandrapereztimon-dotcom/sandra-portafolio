@@ -3,15 +3,26 @@ import { RouterLink } from 'vue-router';
 import { ArrowRight, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-const proyectos = [
+// --- 1. INTERFAZ PARA EL PROYECTO ---
+interface ProyectoIndex {
+  id: string;
+  titulo: string;
+  desc: string;
+  tecnica: string; // Añadimos esto porque lo usas en el template
+}
+
+// --- 2. DATOS TIPADOS ---
+const proyectos: ProyectoIndex[] = [
   { 
     id: 'kaoka', 
     titulo: 'Kaoka', 
+    tecnica: 'Branding & Packaging',
     desc: 'Creación de la identidad visual de una marca de chocolates.' 
   },
   { 
     id: 'mentecatos', 
     titulo: 'Mentecatos', 
+    tecnica: 'Product Design',
     desc: 'Creación de la identidad visual de un juego de mesa.' 
   }
 ];
@@ -31,7 +42,7 @@ const proyectos = [
 
     <main class="max-w-7xl mx-auto px-6 pt-24 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
       <RouterLink v-for="p in proyectos" :key="p.id" :to="`/portafolio/packaging/${p.id}`" class="group">
-        <div class="border-4 border-black p-10 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] group-hover:-translate-y-2 transition-all duration-500 bg-[#FBCFE8] min-h-[350px] flex flex-col justify-between overflow-hidden relative">
+        <div class="border-4 border-black p-10 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] group-hover:-translate-y-2 transition-all duration-500 bg-[#FBCFE8] min-h-87.5 flex flex-col justify-between overflow-hidden relative">
           
           <div>
             <h2 class="text-6xl md:text-7xl font-black uppercase leading-none mb-4 tracking-tighter">
@@ -60,17 +71,15 @@ const proyectos = [
 </template>
 
 <style scoped>
-/* Tipografías específicas */
 .inter-medium { font-family: 'Inter', sans-serif; font-weight: 500; }
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
 h2 {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-style: normal; /* Asegura que no haya cursiva heredada */
+  font-style: normal;
 }
 
-/* Animación de la estrella de fondo */
 @keyframes spin-very-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

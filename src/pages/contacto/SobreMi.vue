@@ -31,7 +31,7 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
         
         <div class="lg:col-span-5 flex justify-center">
           <div class="relative animate-drop-in">
-            <div class="w-72 h-96 md:w-[380px] md:h-[480px] bg-white border-[8px] border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div class="w-72 h-96 md:w-95 md:h-120 bg-white border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
               <img 
                 src="/Img/Contacto/FotoPortafolio.jpg" 
                 alt="Sandra Pérez" 

@@ -48,7 +48,7 @@ const trabajos: Trabajo[] = [
   },
   { 
     id: 2, 
-    src: '/Img/Carteles/Creación Y Fabricación Digital.jpg', 
+    src: '/Img/Carteles/CREFAD.webp', 
     titulo: 'Crefad Cartel', 
     tecnica: 'InDesign' 
   }

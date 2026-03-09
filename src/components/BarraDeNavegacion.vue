@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Menu, X } from 'lucide-vue-next';
@@ -14,7 +14,7 @@ const menuAbierto = ref(false);
 const enlaces = [
   { name: 'Inicio', path: '/' },
   { name: 'Trabajos', path: '/portafolio' },
-  { name: 'Sobre mí', path: '/sobre-mi' },
+  { name: 'Sobre mÃ­', path: '/sobre-mi' },
   { name: 'Contacto', path: '/contacto' }
 ];
 
@@ -22,7 +22,7 @@ const cerrarMenu = () => {
   menuAbierto.value = false;
 };
 
-// Función para cerrar el menú si la pantalla se hace grande
+// FunciÃ³n para cerrar el menÃº si la pantalla se hace grande
 const handleResize = () => {
   if (window.innerWidth >= 768) { // 768px es el breakpoint 'md' de Tailwind
     cerrarMenu();
@@ -41,8 +41,8 @@ onUnmounted(() => {
 <template>
   <header class="w-full bg-white/90 border-b-4 border-black sticky top-0 z-[100] px-8 py-4 flex justify-between items-center backdrop-blur-md">
     
-    <RouterLink to="/" class="poppins-black text-2xl tracking-tighter uppercase hover:scale-105 transition-transform duration-300 relative z-[110]">
-      Sandra Pérez
+    <RouterLink to="/" class="poppins-black text-2xl tracking-tighter uppercase text-black hover:scale-105 transition-transform duration-300 relative z-[110]">
+      Sandra PÃ©rez
     </RouterLink>
 
     <button 
@@ -111,7 +111,7 @@ onUnmounted(() => {
   border-width: 2px;
 }
 
-/* Animación de entrada/salida tipo "Pop" desde la derecha */
+/* AnimaciÃ³n de entrada/salida tipo "Pop" desde la derecha */
 .slide-right-enter-active,
 .slide-right-leave-active {
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);

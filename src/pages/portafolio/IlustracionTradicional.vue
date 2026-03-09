@@ -1,13 +1,12 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// --- INTERFACES ---
-interface ItemCarrusel { 
-  type: 'image'; 
-  src: string; 
-  label: string; 
+interface ItemCarrusel {
+  type: 'image';
+  src: string;
+  label: string;
 }
 
 interface Trabajo {
@@ -15,9 +14,9 @@ interface Trabajo {
   titulo: string;
   tecnica: string;
   esCarrusel?: boolean;
-  portada?: string; 
-  src?: string;      
-  items?: ItemCarrusel[]; 
+  portada?: string;
+  src?: string;
+  items?: ItemCarrusel[];
 }
 
 const imagenSeleccionada = ref<Trabajo | null>(null);
@@ -27,26 +26,27 @@ const indiceDetalle = ref(0);
 let timerGlobal: number | null = null;
 
 const trabajos: Trabajo[] = [
-  { 
-    id: 'proyecto-litografia', 
+  {
+    id: 'proyecto-litografia',
     esCarrusel: true,
     portada: '/Img/IlustracionTradicional/Litografia1.jpg',
-    titulo: 'Estampación caballo y gallina', 
+    titulo: 'Estampación caballo y gallina',
     tecnica: 'Litografía',
     items: [
       { type: 'image', src: '/Img/IlustracionTradicional/Litografia1.jpg', label: 'Estampa I' },
       { type: 'image', src: '/Img/IlustracionTradicional/Litografia2.jpg', label: 'Estampa II' },
     ]
   },
-  { id: 1, src: '/Img/IlustracionTradicional/ArbolAcuarela.jpg', titulo: 'Árbol místico', tecnica: 'Acuarela' },
+  { id: 1, src: '/Img/IlustracionTradicional/Arbol.jpg', titulo: 'Árbol místico', tecnica: 'Acuarela' },
   { id: 2, src: '/Img/IlustracionTradicional/Caballo.jpg', titulo: 'Caballo Carrusel', tecnica: 'Tinta china' },
   { id: 3, src: '/Img/IlustracionTradicional/Calavera.jpg', titulo: 'Calavera', tecnica: 'Grafito' },
-  { 
-    id: 'proyecto-libro', 
+  { id: 4, src: '/Img/IlustracionTradicional/cisne.jpg', titulo: 'Cisne', tecnica: 'Acuarela' },
+  {
+    id: 'proyecto-libro',
     esCarrusel: true,
     portada: '/Img/IlustracionTradicional/LibroPortada.jpg',
-    titulo: 'Alicia en el país de las maravillas', 
-    tecnica: 'Gouache + lápiz de color', 
+    titulo: 'Alicia en el país de las maravillas',
+    tecnica: 'Gouache + lápiz de color',
     items: [
       { type: 'image', src: '/Img/IlustracionTradicional/LibroPortada.jpg', label: 'Portada' },
       { type: 'image', src: '/Img/IlustracionTradicional/LibroPagina.jpg', label: 'Interior' },
@@ -54,24 +54,27 @@ const trabajos: Trabajo[] = [
       { type: 'image', src: '/Img/IlustracionTradicional/GuardasLibro.jpg', label: 'Guardas' },
     ]
   },
-  { id: 5, src: '/Img/IlustracionTradicional/EstatuaSelva.jpg', titulo: 'Estatua en la selva', tecnica: 'Rotuladores de alcohol' },
-  { id: 7, src: '/Img/IlustracionTradicional/SorollaRecreacion.jpg', titulo: 'Reinterpretación sorolla', tecnica: 'Tres tizas' },
-  { id: 8, src: '/Img/IlustracionTradicional/MujerAGrafito.jpg', titulo: 'Mujer', tecnica: 'Grafito' },
-  { 
-    id: 'proyecto-comic', 
+  { id: 5, src: '/Img/IlustracionTradicional/Estatua.jpg', titulo: 'Estatua en la selva', tecnica: 'Rotuladores de alcohol' },
+  { id: 6, src: '/Img/IlustracionTradicional/Indio.jpg', titulo: 'Indio', tecnica: 'Grafito' },
+  { id: 7, src: '/Img/IlustracionTradicional/Sorolla.jpg', titulo: 'Reinterpretación Sorolla', tecnica: 'Tres tizas' },
+  { id: 8, src: '/Img/IlustracionTradicional/Mujer.jpg', titulo: 'Mujer', tecnica: 'Grafito' },
+  { id: 9, src: '/Img/IlustracionTradicional/FondoMarino.jpg', titulo: 'Fondo marino', tecnica: 'Cartulina y rotuladores de alcohol' },
+  { id: 10, src: '/Img/IlustracionTradicional/Girasoles.jpg', titulo: 'Girasoles', tecnica: 'Lápices de color' },
+  {
+    id: 'proyecto-comic',
     esCarrusel: true,
     portada: '/Img/IlustracionTradicional/ComicColor.jpg',
-    titulo: 'Cómic', 
-    tecnica: 'Delineado tradicional + color en digital', 
+    titulo: 'Cómic',
+    tecnica: 'Delineado tradicional + color en digital',
     items: [
       { type: 'image', src: '/Img/IlustracionTradicional/ComicBN.jpg', label: 'B/N' },
-      { type: 'image', src: '/Img/IlustracionTradicional/ComicColor.jpg', label: 'Color Final' },
+      { type: 'image', src: '/Img/IlustracionTradicional/ComicColor.jpg', label: 'Color final' },
     ]
   }
 ];
 
-trabajos.forEach(t => { 
-  if(t.esCarrusel) indicesGrid.value[t.id] = 0; 
+trabajos.forEach(t => {
+  if (t.esCarrusel) indicesGrid.value[t.id] = 0;
 });
 
 onMounted(() => {
@@ -82,10 +85,12 @@ onMounted(() => {
         indicesGrid.value[t.id] = (currentIdx + 1) % t.items.length;
       }
     });
-  }, 2500); 
+  }, 2500);
 });
 
-onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
+onUnmounted(() => {
+  if (timerGlobal) clearInterval(timerGlobal);
+});
 
 const abrirDetalle = (trabajo: Trabajo) => {
   imagenSeleccionada.value = trabajo;
@@ -120,7 +125,7 @@ const cambiarSlide = (dir: number) => {
     <main class="max-w-7xl mx-auto px-6 pt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
       <div v-for="item in trabajos" :key="item.id" @click="abrirDetalle(item)" class="group cursor-pointer">
         <div class="border-4 border-black bg-neutral-900 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[12px_12px_0px_0px_rgba(251,207,232,1)] group-hover:-translate-y-2 group-hover:scale-[1.03] transition-all duration-500 ease-out overflow-hidden relative">
-          
+
           <div class="h-80 w-full relative overflow-hidden bg-neutral-100">
             <template v-if="item.esCarrusel && item.items">
               <transition-group name="slide-fade">
@@ -131,7 +136,7 @@ const cambiarSlide = (dir: number) => {
               <img :src="item.src" class="w-full h-full object-cover object-center" />
             </template>
           </div>
-          
+
           <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center relative z-10">
             <div class="flex flex-col gap-1">
               <span class="poppins-bold uppercase text-xs leading-none">{{ item.titulo }}</span>
@@ -140,7 +145,7 @@ const cambiarSlide = (dir: number) => {
               </span>
             </div>
             <div class="bg-black text-white p-1">
-               <component :is="item.esCarrusel ? Play : Maximize2" :size="16" />
+              <component :is="item.esCarrusel ? Play : Maximize2" :size="16" />
             </div>
           </div>
         </div>
@@ -150,7 +155,7 @@ const cambiarSlide = (dir: number) => {
     <transition name="fade">
       <div v-if="imagenSeleccionada" class="fixed inset-0 z-200 flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="cerrarDetalle"></div>
-        
+
         <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
           <button @click="cerrarDetalle" class="absolute top-4 right-4 z-30 bg-[#FBCFE8] border-4 border-black p-1 hover:bg-black hover:text-white transition-colors">
             <X :size="24" />
@@ -163,7 +168,7 @@ const cambiarSlide = (dir: number) => {
               </div>
 
               <img :src="imagenSeleccionada.items[indiceDetalle]?.src" class="max-w-full max-h-[70vh] object-contain shadow-2xl cursor-zoom-in" @click="modoZoom = true" />
-              
+
               <button @click.stop="cambiarSlide(-1)" class="absolute left-4 bg-white border-4 border-black p-2 hover:bg-[#FBCFE8] transition-all"><ChevronLeft :size="24" /></button>
               <button @click.stop="cambiarSlide(1)" class="absolute right-4 bg-white border-4 border-black p-2 hover:bg-[#FBCFE8] transition-all"><ChevronRight :size="24" /></button>
             </template>
@@ -179,7 +184,7 @@ const cambiarSlide = (dir: number) => {
         </div>
 
         <div v-if="modoZoom" class="fixed inset-0 z-210 bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
-            <img :src="imagenSeleccionada.esCarrusel && imagenSeleccionada.items ? imagenSeleccionada.items[indiceDetalle]?.src : imagenSeleccionada.src" class="max-w-full max-h-full object-contain" />
+          <img :src="imagenSeleccionada.esCarrusel && imagenSeleccionada.items ? imagenSeleccionada.items[indiceDetalle]?.src : imagenSeleccionada.src" class="max-w-full max-h-full object-contain" />
         </div>
       </div>
     </transition>
@@ -192,8 +197,8 @@ const cambiarSlide = (dir: number) => {
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
 /* Animación de carrusel suave */
-.slide-fade-enter-active, .slide-fade-leave-active { 
-  transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1); 
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1);
 }
 .slide-fade-enter-from { transform: translateX(100%); }
 .slide-fade-leave-to { transform: translateX(-100%); }

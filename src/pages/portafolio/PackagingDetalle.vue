@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle, ArrowLeft } from 'lucide-vue-next';
@@ -7,7 +7,7 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 const route = useRoute();
 const proyectoId = route.params.id as string;
 
-// --- 1. INTERFACES (Para que TS sepa qué contienen los objetos) ---
+// --- 1. INTERFACES (Para que TS sepa quÃ© contienen los objetos) ---
 interface GaleriaItem {
   id: string;
   titulo: string;
@@ -33,30 +33,30 @@ let timerGlobal: number | null = null;
 const proyectosData: Record<string, Proyecto> = {
   'kaoka': {
     titulo: 'KAOKA',
-    descripcion: 'Identidad visual y packaging para una línea de chocolates.',
+    descripcion: 'Identidad visual y packaging para una lÃ­nea de chocolates.',
     galeria: [
-      { id: 'chocolates', titulo: 'Gama de Sabores', tecnica: 'Packaging', fotos: ['/Img/Proyectos/Kaoka/ChocolateAmarilllo.png', '/Img/Proyectos/Kaoka/ChocolateMarrón.png', '/Img/Proyectos/Kaoka/ChocolateRosa.png', '/Img/Proyectos/Kaoka/ChocolateVerde.png']},
-      { id: 'tarjetas', titulo: 'Tarjetas Visita', tecnica: 'Branding', fotos: ['/Img/Proyectos/Kaoka/TarjetaPresentacionDelante.png', '/Img/Proyectos/Kaoka/TarjetaPresentacionDetras.png']},
-      { id: 'caja', titulo: 'Caja Kaoka', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Kaoka/CajaKaoka.png'] },
-      { id: 'mockup', titulo: 'Mockup General', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Kaoka/MockupChocolates.png'] },
+      { id: 'chocolates', titulo: 'Gama de Sabores', tecnica: 'Packaging', fotos: ['/Img/Proyectos/Kaoka/ChocolateAmarilllo.jpg', '/Img/Proyectos/Kaoka/ChocolateMarrón.jpg', '/Img/Proyectos/Kaoka/ChocolateRosa.jpg', '/Img/Proyectos/Kaoka/ChocolateVerde.jpg']},
+      { id: 'tarjetas', titulo: 'Tarjetas Visita', tecnica: 'Branding', fotos: ['/Img/Proyectos/Kaoka/TarjetaPresentacionDelante.jpg', '/Img/Proyectos/Kaoka/TarjetaPresentacionDetras.jpg']},
+      { id: 'caja', titulo: 'Caja Kaoka', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Kaoka/IMG_2232.jpg'] },
+      { id: 'mockup', titulo: 'Mockup General', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Kaoka/MockupChcolates.png'] },
       { id: 'tote', titulo: 'Tote Bag', tecnica: 'Merchandising', fotos: ['/Img/Proyectos/Kaoka/ToteBag.png'] }
     ]
   },
   'mentecatos': {
     titulo: 'MENTECATOS',
-    descripcion: 'Diseño integral de un juego de mesa sobre la salud mental.',
+    descripcion: 'DiseÃ±o integral de un juego de mesa sobre la salud mental.',
     galeria: [
-      { id: 'cartas', titulo: 'Mazo de Cartas', tecnica: 'Ilustración', fotos: Array.from({length: 12}, (_, i) => `/Img/Proyectos/Mentecatos/cartas finales organizadas_page-${(i + 1).toString().padStart(4, '0')}.jpg`) },
-      { id: 'mockups', titulo: 'Mockups Juego', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Mentecatos/Mock up 1.jpg', '/Img/Proyectos/Mentecatos/MockUp2.jpg', '/Img/Proyectos/Mentecatos/MockUp3.jpg', '/Img/Proyectos/Mentecatos/MockUp4.jpg']},
-      { id: 'caja_p', titulo: 'Packaging Caja', tecnica: 'Diseño', fotos: ['/Img/Proyectos/Mentecatos/CajaDelante.jpg', '/Img/Proyectos/Mentecatos/CajaMaqueta.jpg']},
-      { id: 'tablero', titulo: 'Tablero', tecnica: 'Diseño', fotos: ['/Img/Proyectos/Mentecatos/TableroMentecatos.jpg'] }
+      { id: 'cartas', titulo: 'Mazo de Cartas', tecnica: 'IlustraciÃ³n', fotos: Array.from({length: 12}, (_, i) => `/Img/Proyectos/Mentecatos/cartas finales organizadas_page-${(i + 1).toString().padStart(4, '0')}.jpg`) },
+      { id: 'mockups', titulo: 'Mockups Juego', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Mentecatos/Mock up 1.jpg', '/Img/Proyectos/Mentecatos/MockUp2.jpg', '/Img/Proyectos/Mentecatos/MockUp4.jpg', '/Img/Proyectos/Mentecatos/MockUp4.jpg']},
+      { id: 'caja_p', titulo: 'Packaging Caja', tecnica: 'DiseÃ±o', fotos: ['/Img/Proyectos/Mentecatos/CajaDelante.jpg', '/Img/Proyectos/Mentecatos/CajaMaqueta.jpg']},
+      { id: 'tablero', titulo: 'Tablero', tecnica: 'DiseÃ±o', fotos: ['/Img/Proyectos/Mentecatos/TableroMentecatos.jpg'] }
     ]
   }
 };
 
 const data = computed(() => proyectosData[proyectoId]);
 
-// Inicialización segura de índices
+// InicializaciÃ³n segura de Ã­ndices
 if (data.value) {
   data.value.galeria.forEach((item) => {
     if (item.fotos.length > 1) indicesGrid.value[item.id] = 0;
@@ -68,7 +68,7 @@ onMounted(() => {
     if (data.value) {
       data.value.galeria.forEach((item) => {
         if (item.fotos.length > 1) {
-          // Usamos || 0 para asegurar que siempre haya un número
+          // Usamos || 0 para asegurar que siempre haya un nÃºmero
           const currentIdx = indicesGrid.value[item.id] ?? 0;
           indicesGrid.value[item.id] = (currentIdx + 1) % item.fotos.length;
         }
@@ -81,7 +81,7 @@ onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
 const abrirDetalle = (item: GaleriaItem) => {
   imagenSeleccionada.value = item;
-  // Acceso seguro al índice del grid
+  // Acceso seguro al Ã­ndice del grid
   indiceDetalle.value = item.fotos.length > 1 ? (indicesGrid.value[item.id] ?? 0) : 0;
 };
 
@@ -174,7 +174,7 @@ const cambiarSlide = (dir: number) => {
           
           <div class="md:w-2/5 p-10 flex flex-col justify-center bg-white border-l-4 border-black">
             <h2 class="text-3xl md:text-4xl poppins-bold uppercase leading-tight mb-4 tracking-tighter">{{ imagenSeleccionada?.titulo }}</h2>
-            <p class="inter-bold text-sm uppercase tracking-wider text-black">Técnica: {{ imagenSeleccionada?.tecnica || 'Diseño' }}</p>
+            <p class="inter-bold text-sm uppercase tracking-wider text-black">TÃ©cnica: {{ imagenSeleccionada?.tecnica || 'DiseÃ±o' }}</p>
           </div>
         </div>
 

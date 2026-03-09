@@ -1,0 +1,69 @@
+﻿C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Carteles\CartelEnvidiaFotp.jpg | 0.103 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Carteles\CartelEnvidiaGeo.jpg | 0.04 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Carteles\CartelEnvidiaText.jpg | 0.171 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Carteles\CartelTeatroFlumen.png | 0.98 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Carteles\CREFAD.webp | 0.139 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Contacto\FotoPortafolio.jpg | 0.138 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\DisenoEditorial\Articulo_CMYK_page-0001.jpg | 0.318 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\DisenoEditorial\Articulo_CMYK_page-0002.jpg | 0.899 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\DisenoEditorial\Articulo_CMYK_page-0003.jpg | 0.463 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\DisenoEditorial\Articulo_CMYK_page-0004.jpg | 0.519 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\DisenoEditorial\Articulo_CMYK_page-0005.jpg | 0.372 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\A.jpg | 0.773 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\Comision1.jpeg | 1.084 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\Comision2.jpeg | 0.28 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\Comision3.jpeg | 1.003 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\Comision4.jpeg | 0.801 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\IlustracionSelva.jpg | 1.379 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\P.jpg | 0.85 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionDigital\T.jpg | 0.815 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\ArbolAcuarela.jpg | 1.804 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Caballo.jpg | 1.165 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Calavera.jpg | 0.989 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Cisne.jpg | 2.397 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\ComicBN.jpg | 1.771 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\ComicColor.jpg | 2.121 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\DoblePaginaLibro.jpg | 1.893 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\EstatuaSelva.jpg | 1.707 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Girasoles.jpg | 1.625 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\GuardasLibro.jpg | 1.216 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\IlustracionConceptual.jpg | 2.222 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Indio.jpg | 1.374 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\LibroPagina.jpg | 1.151 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\LibroPortada.jpg | 1.754 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Litografia1.jpg | 0.878 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Litografia2.jpg | 1.378 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\Manualidad.jpg | 1.483 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\MujerAGrafito.jpg | 1.144 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\IlustracionTradicional\SorollaRecreacion.jpg | 1.713 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\CajaKaoka.png | 2.891 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\ChocolateAmarilllo.png | 0.381 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\ChocolateMarrón.png | 0.973 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\ChocolateRosa.png | 0.923 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\ChocolatesBox.png | 2.356 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\ChocolateVerde.png | 0.734 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\MockupChocolates.png | 4.195 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\PosterPromocional.png | 0.895 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\TarjetaInformativa.png | 12.829 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\TarjetaPresentacionDelante.png | 0.611 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\TarjetaPresentacionDetras.png | 0.458 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Kaoka\ToteBag.png | 1.3 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\CajaDelante.jpg | 0.743 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\CajaMaqueta.jpg | 0.461 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0001.jpg | 0.093 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0002.jpg | 0.083 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0003.jpg | 0.098 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0004.jpg | 0.097 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0005.jpg | 0.091 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0006.jpg | 0.093 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0007.jpg | 0.028 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0008.jpg | 0.031 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0009.jpg | 0.029 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0010.jpg | 0.023 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0011.jpg | 0.028 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\cartas finales organizadas_page-0012.jpg | 0.03 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\Mock up 1.jpg | 0.483 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\MockUp2.jpg | 0.419 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\MockUp3.jpg | 0.398 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\MockUp4.jpg | 0.476 MB
+C:\Users\alexp\OneDrive\Escritorio\Portafolio\public\Img\Proyectos\Mentecatos\TableroMentecatos.jpg | 0.444 MB

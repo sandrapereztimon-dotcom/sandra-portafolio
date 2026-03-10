@@ -38,15 +38,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="w-full bg-white/90 border-b-4 border-black sticky top-0 z-[100] px-8 py-4 flex justify-between items-center backdrop-blur-md">
+  <header class="w-full bg-white/90 border-b-4 border-black sticky top-0 z-100 px-8 py-4 flex justify-between items-center backdrop-blur-md">
     
-    <RouterLink to="/" class="poppins-black text-2xl tracking-tighter uppercase text-black hover:scale-105 transition-transform duration-300 relative z-[110]">
+    <RouterLink to="/" class="poppins-black text-2xl tracking-tighter uppercase text-black hover:scale-105 transition-transform duration-300 relative z-110">
       Sandra Pérez
     </RouterLink>
 
     <button 
       @click="menuAbierto = !menuAbierto" 
-      class="md:hidden p-2 border-4 border-black bg-[#FBCFE8] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all z-[110]"
+      class="md:hidden p-2 border-4 border-black bg-[#FBCFE8] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all z-110"
     >
       <Menu v-if="!menuAbierto" :size="24" />
       <X v-else :size="24" />
@@ -71,7 +71,7 @@ onUnmounted(() => {
     <transition name="slide-right">
       <div 
         v-if="menuAbierto" 
-        class="fixed top-20 right-4 w-64 bg-white border-4 border-black p-8 flex flex-col gap-6 z-[105] shadow-[10px_10px_0px_0px_rgba(251,207,232,1)] md:hidden items-center"
+        class="fixed top-20 right-4 w-64 bg-white border-4 border-black p-8 flex flex-col gap-6 z-105 shadow-[10px_10px_0px_0px_rgba(251,207,232,1)] md:hidden items-center"
       >
         <RouterLink 
           v-for="item in enlaces" 
@@ -89,7 +89,7 @@ onUnmounted(() => {
     <div 
       v-if="menuAbierto" 
       @click="cerrarMenu" 
-      class="fixed inset-0 bg-black/10 backdrop-blur-sm z-[100] md:hidden"
+      class="fixed inset-0 bg-black/10 backdrop-blur-sm z-100 md:hidden"
     ></div>
   </header>
 </template>

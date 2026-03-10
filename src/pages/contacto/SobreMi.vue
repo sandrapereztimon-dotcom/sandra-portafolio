@@ -1,9 +1,6 @@
 ﻿<script setup lang="ts">
-import { RouterLink } from 'vue-router';
-import {
-  ArrowLeft, GraduationCap, Star,
-  Circle, Triangle, Square, Palette, Code
-} from 'lucide-vue-next';
+import { 
+  Star, Circle, Triangle, Square} from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 </script>
 
@@ -21,17 +18,12 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
       <Square :size="150" class="absolute top-1/2 right-[5%] text-black/5 animate-levitate-delayed fill-current stroke-0" />
     </div>
 
-    <div class="max-w-6xl mx-auto px-6 py-12 md:py-20 relative z-10">
-
-      <RouterLink to="/" class="inline-flex items-center gap-2 inter-bold uppercase mb-12 hover:bg-black hover:text-white transition-all bg-white px-6 py-3 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:shadow-none">
-        <ArrowLeft :size="20" /> Inicio
-      </RouterLink>
-
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-24 relative z-10">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
         <div class="lg:col-span-5 flex justify-center">
           <div class="relative animate-drop-in">
-            <div class="w-72 h-96 md:w-95 md:h-120 bg-white border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div class="w-72 h-96 md:w-96 md:h-120 bg-white border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
               <img
                 src="/Img/Contacto/FotoPortafolio.jpg"
                 alt="Sandra Pérez"
@@ -46,54 +38,57 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
         </div>
 
         <div class="lg:col-span-7 space-y-8 animate-fade-in-up">
-
-          <div class="bg-white border-4 border-black p-8 md:p-10 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-            <p class="text-xl md:text-2xl inter-regular leading-snug mb-8">
-              Soy una estudiante de diseño apasionada por la ilustración y la animación. Soy muy comprometida y perfeccionista, y me encanta mezclar el trabajo tradicional con el digital para crear piezas con personalidad.
+          <div class="bg-white border-4 border-black p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+            
+            <p class="text-lg md:text-xl inter-regular leading-relaxed mb-10 text-gray-900">
+              Estudiante de diseño con un enfoque centrado en la ilustración tradicional y digital. Mi trabajo se define por el compromiso con el detalle y una búsqueda constante de la perfección, fusionando técnicas tradicionales con herramientas digitales para dotar a cada pieza de una personalidad única.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t-4 border-black">
-              <div class="space-y-3">
-                <h3 class="poppins-bold uppercase flex items-center gap-2 text-xl">
-                  <GraduationCap :size="22" class="text-[#FBCFE8] fill-black" /> Formación
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t-4 border-black">
+              
+              <div class="space-y-4">
+                <h3 class="poppins-bold uppercase flex items-center gap-2 text-xl border-b-2 border-black pb-2">
+                  Formación
                 </h3>
-                <div class="inter-regular text-base space-y-3">
-                  <p><span class="font-bold uppercase tracking-tight">Bachillerato</span></p>
-                  <p>
-                    <span class="font-bold uppercase tracking-tight">Grado en Diseño y Tecnologías Creativas</span><br>
-                    <span class="opacity-80">UPV - Actualmente cursando</span>
-                  </p>
-                  <p><span class="font-bold uppercase tracking-tight">Inglés C1</span></p>
+                <div class="inter-regular text-base space-y-4">
+                  <div>
+                    <p class="uppercase text-xs inter-bold tracking-widest text-gray-500 mb-1">Secundaria</p>
+                    <p>Bachillerato artístico</p>
+                  </div>
+                  <div>
+                    <p class="uppercase text-xs inter-bold tracking-widest text-gray-500 mb-1">Grado Universitario</p>
+                    <p>Diseño y Tecnologías Creativas</p>
+                    <p class="text-sm opacity-70">UPV — Actualmente cursando</p>
+                  </div>
+                  <div>
+                    <p class="uppercase text-xs inter-bold tracking-widest text-gray-500 mb-1">Idiomas</p>
+                    <p>Inglés nivel C1 certificado</p>
+                  </div>
                 </div>
               </div>
 
-              <div class="space-y-3">
-                <h3 class="poppins-bold uppercase flex items-center gap-2 text-xl">
-                  <Code :size="22" class="text-[#FBCFE8] fill-black" /> Habilidades
+              <div class="space-y-4">
+                <h3 class="poppins-bold uppercase flex items-center gap-2 text-xl border-b-2 border-black pb-2">
+                  Herramientas
                 </h3>
-                <div class="flex flex-wrap gap-2">
-                  <span class="software-pill bg-[#ff9a00] text-black">Ai</span>
-                  <span class="software-pill bg-[#001e36] text-[#31a8ff]">Ps</span>
-                  <span class="software-pill bg-[#49021f] text-[#ff3366]">Id</span>
-                  <span class="software-pill bg-[#00005b] text-[#9999ff]">Ae</span>
-                </div>
-                <ul class="inter-regular text-base space-y-1 pt-1">
-                  <li>• Illustrator</li>
-                  <li>• Photoshop</li>
-                  <li>• InDesign</li>
-                  <li>• After Effects</li>
-                  <li>• Técnicas tradicionales</li>
+                <ul class="inter-regular text-base space-y-2">
+                  <li class="flex items-center gap-2"> Adobe Illustrator</li>
+                  <li class="flex items-center gap-2"> Adobe Photoshop</li>
+                  <li class="flex items-center gap-2"> Adobe InDesign</li>
+                  <li class="flex items-center gap-2"> Adobe After Effects</li>
+                  <li class="flex items-center gap-2"> Técnicas pictóricas tradicionales</li>
                 </ul>
               </div>
 
-              <div class="space-y-3 md:col-span-2">
-                <h3 class="poppins-bold uppercase flex items-center gap-2 text-xl">
-                  <Palette :size="22" class="text-[#FBCFE8] fill-black" /> Qué hago
+              <div class="space-y-4 md:col-span-2">
+                <h3 class="poppins-bold uppercase flex items-center gap-2 text-xl border-b-2 border-black pb-2">
+                  Mi enfoque
                 </h3>
                 <p class="inter-regular text-base leading-relaxed">
-                  Desarrollo proyectos de ilustración, animación y diseño visual combinando técnica manual y herramientas digitales para lograr resultados expresivos y bien cuidados.
+                  Me especializo en el desarrollo de proyectos visuales a través de todos los lenguajes visuales. Me apasiona explorar cómo las texturas manuales pueden enriquecer el diseño digital.
                 </p>
               </div>
+
             </div>
           </div>
         </div>
@@ -106,18 +101,8 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 .poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 800; }
-.software-pill {
-  border: 2px solid black;
-  padding: 0.25rem 0.5rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
 
-/* Animaciones de levitación */
+
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes levitate {
@@ -134,7 +119,6 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 .animate-levitate { animation: levitate 8s ease-in-out infinite; }
 .animate-levitate-delayed { animation: levitate-delayed 10s ease-in-out infinite; }
 
-/* Animaciones de entrada */
 @keyframes dropIn {
   0% { transform: translateY(-50px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }

@@ -105,7 +105,7 @@ const categorias = [
 .poppins-bold { font-family: "Poppins", sans-serif; font-weight: 800; }
 .inter-regular { font-family: "Inter", sans-serif; font-weight: 400; }
 
-/* Animaciones para mantener el dinamismo de la web */
+
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes levitate {

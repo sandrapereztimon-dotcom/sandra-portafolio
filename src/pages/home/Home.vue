@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { 
-  Star, Circle, Triangle, Square 
+  Star, Circle, Triangle, Square, ArrowRight, MessageCircle
 } from 'lucide-vue-next';
 
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
       <Square :size="150" class="absolute top-1/2 right-[5%] text-black/5 animate-levitate-delayed fill-current stroke-0" />
     </div>
 
-    <section class="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 py-24 relative z-10">
+    <section class="min-h-[90vh] flex flex-col md:flex-row items-center justify-center px-6 md:px-20 py-24 relative z-10">
       
       <div class="w-full md:w-1/2 flex justify-center md:justify-start mb-12 md:mb-0">
         <RouterLink to="/sobre-mi" class="relative group">
@@ -48,10 +48,15 @@ import { Button } from '@/components/ui/button';
           
           <div class="flex flex-wrap gap-4 pt-4">
             <Button as-child class="rounded-none border-[3px] border-black bg-white text-black hover:bg-[#FBCFE8] hover:text-black transition-all px-8 py-6 poppins-bold uppercase shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
-              <RouterLink to="/contacto">¡Hablemos!</RouterLink>
+              <RouterLink to="/contacto" class="flex items-center gap-2">
+                <MessageCircle :size="20" /> ¡Hablemos!
+              </RouterLink>
             </Button>
+
             <Button as-child variant="outline" class="rounded-none border-[3px] border-black bg-white text-black hover:bg-[#FBCFE8] hover:text-black transition-all px-8 py-6 poppins-bold uppercase shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
-              <RouterLink to="/portafolio/carteles">Ver Trabajo</RouterLink>
+              <RouterLink to="/portafolio" class="flex items-center gap-2">
+                Ver Trabajos <ArrowRight :size="20" />
+              </RouterLink>
             </Button>
           </div>
         </div>
@@ -81,7 +86,7 @@ import { Button } from '@/components/ui/button';
 .inter-light { font-family: "Inter", sans-serif; font-weight: 300; }
 .inter-bold { font-family: "Inter", sans-serif; font-weight: 800; }
 
-/* ANIMACIONES */
+
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes levitate {

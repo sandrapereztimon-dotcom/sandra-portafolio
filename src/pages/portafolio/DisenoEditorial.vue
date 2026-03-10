@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// --- 1. INTERFACES ---
+
 interface ItemCarrusel { 
   type: 'image'; 
   src: string; 
@@ -20,14 +20,14 @@ interface Trabajo {
   items?: ItemCarrusel[]; 
 }
 
-// --- 2. ESTADO ---
+
 const imagenSeleccionada = ref<Trabajo | null>(null);
 const modoZoom = ref(false);
 const indicesGrid = ref<Record<string | number, number>>({});
 const indiceDetalle = ref(0);
 let timerGlobal: number | null = null;
 
-// --- 3. DATOS ---
+
 const trabajos: Trabajo[] = [
   { 
     id: 'articulo-cmyk', 
@@ -45,7 +45,7 @@ const trabajos: Trabajo[] = [
   }
 ];
 
-// Inicialización de índices para el grid
+
 trabajos.forEach(t => { 
   if(t.esCarrusel) indicesGrid.value[t.id] = 0; 
 });
@@ -63,7 +63,7 @@ onMounted(() => {
 
 onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
-// --- 4. FUNCIONES ---
+
 const abrirDetalle = (trabajo: Trabajo) => {
   imagenSeleccionada.value = trabajo;
   indiceDetalle.value = trabajo.esCarrusel ? (indicesGrid.value[trabajo.id] ?? 0) : 0;
@@ -166,21 +166,21 @@ const cambiarSlide = (dir: number) => {
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
-/* Animación Carrusel */
+
 .slide-fade-enter-active, .slide-fade-leave-active { 
   transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1); 
 }
 .slide-fade-enter-from { transform: translateX(100%); }
 .slide-fade-leave-to { transform: translateX(-100%); }
 
-/* Animación Modal */
+
 .animate-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 @keyframes pop { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.4s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
-/* Giro estrella fondo */
+
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
 </style>

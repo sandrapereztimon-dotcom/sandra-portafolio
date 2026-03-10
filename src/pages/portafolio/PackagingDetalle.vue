@@ -7,7 +7,6 @@ import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 const route = useRoute();
 const proyectoId = route.params.id as string;
 
-// --- 1. INTERFACES (Para que TS sepa quÃ© contienen los objetos) ---
 interface GaleriaItem {
   id: string;
   titulo: string;
@@ -21,15 +20,14 @@ interface Proyecto {
   galeria: GaleriaItem[];
 }
 
-// --- 2. REFS TIPADOS ---
-// Definimos que imagenSeleccionada puede ser un GaleriaItem o null
+
 const imagenSeleccionada = ref<GaleriaItem | null>(null);
 const modoZoom = ref(false);
 const indicesGrid = ref<Record<string, number>>({});
 const indiceDetalle = ref(0);
 let timerGlobal: number | null = null;
 
-// Tipamos el objeto global de datos
+
 const proyectosData: Record<string, Proyecto> = {
   'kaoka': {
     titulo: 'KAOKA',
@@ -56,7 +54,7 @@ const proyectosData: Record<string, Proyecto> = {
 
 const data = computed(() => proyectosData[proyectoId]);
 
-// InicializaciÃ³n segura de Ã­ndices
+
 if (data.value) {
   data.value.galeria.forEach((item) => {
     if (item.fotos.length > 1) indicesGrid.value[item.id] = 0;
@@ -81,7 +79,7 @@ onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
 const abrirDetalle = (item: GaleriaItem) => {
   imagenSeleccionada.value = item;
-  // Acceso seguro al Ã­ndice del grid
+
   indiceDetalle.value = item.fotos.length > 1 ? (indicesGrid.value[item.id] ?? 0) : 0;
 };
 
@@ -187,7 +185,7 @@ const cambiarSlide = (dir: number) => {
 </template>
 
 <style scoped>
-/* (Estilos se mantienen iguales) */
+
 .poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-medium { font-family: 'Inter', sans-serif; font-weight: 500; }

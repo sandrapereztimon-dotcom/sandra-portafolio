@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// --- INTERFACES ---
+
 interface ItemCarrusel { 
   type: 'image'; 
   src: string; 
@@ -19,14 +19,15 @@ interface Trabajo {
   items?: ItemCarrusel[]; 
 }
 
-// --- ESTADO ---
+
 const imagenSeleccionada = ref<Trabajo | null>(null);
 const modoZoom = ref(false);
 const indicesGrid = ref<Record<string | number, number>>({});
 const indiceDetalle = ref(0);
 let timerGlobal: number | null = null;
 
-// --- DATOS ---
+
+
 const trabajos: Trabajo[] = [
   { 
     id: 'envidia', 
@@ -54,7 +55,7 @@ const trabajos: Trabajo[] = [
   }
 ];
 
-// Inicialización de índices para el carrusel del grid
+
 trabajos.forEach(t => { 
   if(t.esCarrusel) indicesGrid.value[t.id] = 0; 
 });
@@ -72,7 +73,7 @@ onMounted(() => {
 
 onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
-// --- FUNCIONES ---
+
 const abrirDetalle = (trabajo: Trabajo) => {
   imagenSeleccionada.value = trabajo;
   indiceDetalle.value = trabajo.esCarrusel ? (indicesGrid.value[trabajo.id] ?? 0) : 0;
@@ -138,7 +139,7 @@ const cambiarSlide = (dir: number) => {
     </main>
 
     <transition name="fade">
-      <div v-if="imagenSeleccionada" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
+      <div v-if="imagenSeleccionada" class="fixed inset-0 z-200 flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="cerrarDetalle"></div>
         
         <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
@@ -167,7 +168,7 @@ const cambiarSlide = (dir: number) => {
           </div>
         </div>
 
-        <div v-if="modoZoom" class="fixed inset-0 z-[210] bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
+        <div v-if="modoZoom" class="fixed inset-0 z-210 bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
             <img 
               :src="imagenSeleccionada.esCarrusel && imagenSeleccionada.items ? imagenSeleccionada.items[indiceDetalle]?.src : imagenSeleccionada.src" 
               class="max-w-full max-h-full object-contain" 

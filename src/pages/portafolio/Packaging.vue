@@ -3,15 +3,15 @@ import { RouterLink } from 'vue-router';
 import { ArrowRight, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// --- 1. INTERFAZ PARA EL PROYECTO ---
+
 interface ProyectoIndex {
   id: string;
   titulo: string;
   desc: string;
-  tecnica: string; // Añadimos esto porque lo usas en el template
+  tecnica: string; 
 }
 
-// --- 2. DATOS TIPADOS ---
+
 const proyectos: ProyectoIndex[] = [
   { 
     id: 'kaoka', 

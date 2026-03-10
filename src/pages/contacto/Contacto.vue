@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Mail, Instagram, Send, Star, Circle, Triangle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// --- ESTADO DEL FORMULARIO ---
+
 const formulario = ref({ nombre: '', email: '', mensaje: '' });
 const enviado = ref(false);
 
@@ -16,9 +16,9 @@ const enviarFormulario = () => {
   }, 4000);
 };
 
-// --- LÓGICA DE REDES ---
+
 const handleInstagramClick = (e: Event) => {
-  e.preventDefault(); // Evita que la página suba al inicio al hacer clic en '#'
+  e.preventDefault(); 
   alert("¡Próximamente disponible!");
 };
 
@@ -31,7 +31,7 @@ const redes = [
   },
   { 
     nombre: 'Email', 
-    url: 'mailto:sandra@ejemplo.com', // Cambia esto por tu email real
+    url: 'mailto:sandra@ejemplo.com', 
     icon: Mail, 
     action: null 
   }
@@ -140,12 +140,12 @@ const redes = [
 </template>
 
 <style scoped>
-/* FUENTES */
+
 .poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
-/* ANIMACIONES */
+
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes levitate {
@@ -157,7 +157,7 @@ const redes = [
 .animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
 .animate-levitate { animation: levitate 10s ease-in-out infinite; }
 
-/* TRANSICIÓN FADE */
+
 .fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

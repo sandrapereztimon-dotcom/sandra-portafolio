@@ -196,7 +196,7 @@ const cambiarSlide = (dir: number) => {
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
-/* Animación de carrusel suave */
+
 .slide-fade-enter-active, .slide-fade-leave-active {
   transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1);
 }

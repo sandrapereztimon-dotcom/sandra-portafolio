@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { X, Maximize2, ChevronLeft, ChevronRight, Play, Star, Circle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
-// --- 1. INTERFACES PARA TYPESCRIPT ---
+
 interface ItemCarrusel { 
   type: 'image' | 'video'; 
   src: string; 
@@ -20,14 +20,14 @@ interface Trabajo {
   items?: ItemCarrusel[]; 
 }
 
-// --- 2. ESTADO REACTIVO ---
+
 const imagenSeleccionada = ref<Trabajo | null>(null);
 const modoZoom = ref(false);
 const indicesGrid = ref<Record<string | number, number>>({});
 const indiceDetalle = ref(0);
 let timerGlobal: number | null = null;
 
-// --- 3. DATOS DE PROYECTOS ---
+
 const trabajos: Trabajo[] = [
   { 
     id: 'animacion-letras', 
@@ -49,7 +49,7 @@ const trabajos: Trabajo[] = [
   { id: 5, src: '/Img/IlustracionDigital/IlustracionSelva.jpg', titulo: 'Ilustración selva', tecnica: 'Digital' }
 ];
 
-// InicializaciÃ³n de Ã­ndices
+
 trabajos.forEach(t => { 
   if(t.esCarrusel) indicesGrid.value[t.id] = 0; 
 });
@@ -67,10 +67,10 @@ onMounted(() => {
 
 onUnmounted(() => { if(timerGlobal) clearInterval(timerGlobal); });
 
-// --- 4. FUNCIONES DE INTERACCIÃ“N ---
+
 const abrirDetalle = (trabajo: Trabajo) => {
   imagenSeleccionada.value = trabajo;
-  // Acceso seguro al Ã­ndice guardado
+
   indiceDetalle.value = trabajo.esCarrusel ? (indicesGrid.value[trabajo.id] ?? 0) : 0;
 };
 

@@ -14,7 +14,7 @@ const menuAbierto = ref(false);
 const enlaces = [
   { name: 'Inicio', path: '/' },
   { name: 'Trabajos', path: '/portafolio' },
-  { name: 'Sobre mí­', path: '/sobre-mi' },
+  { name: 'Sobre mí', path: '/sobre-mi' }, // Acento corregido
   { name: 'Contacto', path: '/contacto' }
 ];
 
@@ -22,9 +22,8 @@ const cerrarMenu = () => {
   menuAbierto.value = false;
 };
 
-// FunciÃ³n para cerrar el menÃº si la pantalla se hace grande
 const handleResize = () => {
-  if (window.innerWidth >= 768) { // 768px es el breakpoint 'md' de Tailwind
+  if (window.innerWidth >= 768) {
     cerrarMenu();
   }
 };
@@ -39,15 +38,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="w-full bg-white/90 border-b-4 border-black sticky top-0 z-100 px-8 py-4 flex justify-between items-center backdrop-blur-md">
+  <header class="w-full bg-white/90 border-b-4 border-black sticky top-0 z-[100] px-8 py-4 flex justify-between items-center backdrop-blur-md">
     
-    <RouterLink to="/" class="poppins-black text-2xl tracking-tighter uppercase text-black hover:scale-105 transition-transform duration-300 relative z-110">
+    <RouterLink to="/" class="poppins-black text-2xl tracking-tighter uppercase text-black hover:scale-105 transition-transform duration-300 relative z-[110]">
       Sandra Pérez
     </RouterLink>
 
     <button 
       @click="menuAbierto = !menuAbierto" 
-      class="md:hidden p-2 border-4 border-black bg-[#FBCFE8] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all z-110"
+      class="md:hidden p-2 border-4 border-black bg-[#FBCFE8] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all z-[110]"
     >
       <Menu v-if="!menuAbierto" :size="24" />
       <X v-else :size="24" />
@@ -59,7 +58,7 @@ onUnmounted(() => {
           <NavigationMenuLink as-child>
             <RouterLink 
               :to="item.path" 
-              class="poppins-regular text-xs uppercase tracking-[0.2em] px-5 py-2 border-2 border-transparent transition-all duration-300 ease-in-out hover:border-black flex items-center justify-center"
+              class="poppins-regular text-xs uppercase tracking-[0.2em] px-5 py-2 border-2 border-transparent transition-all duration-300 ease-in-out hover:border-black flex items-center justify-center text-center"
               active-class="active-link"
             >
               {{ item.name }}
@@ -72,14 +71,14 @@ onUnmounted(() => {
     <transition name="slide-right">
       <div 
         v-if="menuAbierto" 
-        class="fixed top-20 right-4 w-64 bg-white border-4 border-black p-8 flex flex-col gap-6 z-105 shadow-[10px_10px_0px_0px_rgba(251,207,232,1)] md:hidden"
+        class="fixed top-20 right-4 w-64 bg-white border-4 border-black p-8 flex flex-col gap-6 z-[105] shadow-[10px_10px_0px_0px_rgba(251,207,232,1)] md:hidden items-center"
       >
         <RouterLink 
           v-for="item in enlaces" 
           :key="item.name"
           :to="item.path"
           @click="cerrarMenu"
-          class="poppins-bold text-sm uppercase tracking-widest px-4 py-3 border-2 border-transparent transition-all duration-300 flex justify-center text-center"
+          class="poppins-bold text-sm uppercase tracking-widest px-4 py-3 border-2 border-transparent transition-all duration-300 w-full text-center flex justify-center items-center"
           active-class="active-link"
         >
           {{ item.name }}
@@ -90,7 +89,7 @@ onUnmounted(() => {
     <div 
       v-if="menuAbierto" 
       @click="cerrarMenu" 
-      class="fixed inset-0 bg-black/10 backdrop-blur-sm z-100 md:hidden"
+      class="fixed inset-0 bg-black/10 backdrop-blur-sm z-[100] md:hidden"
     ></div>
   </header>
 </template>
@@ -100,7 +99,6 @@ onUnmounted(() => {
 .poppins-bold { font-family: "Poppins", sans-serif; font-weight: 700; }
 .poppins-black { font-family: "Poppins", sans-serif; font-weight: 900; }
 
-/* CLASE ACTIVA (Fondo rosa + Sombra negra) */
 .active-link {
   background-color: #FBCFE8 !important;
   border-color: black !important;
@@ -111,7 +109,6 @@ onUnmounted(() => {
   border-width: 2px;
 }
 
-/* AnimaciÃ³n de entrada/salida tipo "Pop" desde la derecha */
 .slide-right-enter-active,
 .slide-right-leave-active {
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);

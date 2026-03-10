@@ -41,7 +41,7 @@ const redes = [
 <template>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Poppins:wght@800&display=swap" rel="stylesheet">
 
-  <div class="min-h-screen bg-black text-white selection:bg-[#FBCFE8] selection:text-black relative overflow-hidden [&_nav_a]:!text-black [&_a]:no-underline">
+  <div class="min-h-screen bg-black text-white selection:bg-[#FBCFE8] selection:text-black relative overflow-hidden [&_nav_a]:text-black! [&_a]:no-underline">
     
     <BarraDeNavegacion />
 
@@ -112,7 +112,7 @@ const redes = [
           <div class="flex flex-col">
             <div class="bg-black text-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(251,207,232,1)] mb-12">
                <p class="text-lg md:text-xl inter-regular leading-snug">
-                Si tienes un proyecto en mente o simplemente quieres decir hola, ¡no dudes en escribirme!
+                Si tienes un proyecto en mente, ¡no dudes en escribirme!
               </p>
             </div>
 

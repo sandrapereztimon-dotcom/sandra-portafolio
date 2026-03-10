@@ -54,7 +54,7 @@ const trabajos: Trabajo[] = [
   }
 ];
 
-// InicializaciÃ³n de Ã­ndices para el carrusel del grid
+// Inicialización de índices para el carrusel del grid
 trabajos.forEach(t => { 
   if(t.esCarrusel) indicesGrid.value[t.id] = 0; 
 });
@@ -127,7 +127,7 @@ const cambiarSlide = (dir: number) => {
           <div class="p-4 border-t-4 border-black bg-white flex justify-between items-center relative z-10">
             <div class="flex flex-col gap-1">
               <span class="poppins-bold uppercase text-xs leading-none">{{ item.titulo }}</span>
-              <span class="inter-regular text-[10px] text-gray-700 uppercase tracking-tighter leading-none">TÃ©cnica: {{ item.tecnica }}</span>
+              <span class="inter-regular text-[10px] text-gray-700 uppercase tracking-tighter leading-none">Técnica: {{ item.tecnica }}</span>
             </div>
             <div class="bg-black text-white p-1">
                <component :is="item.esCarrusel ? Play : Maximize2" :size="16" />
@@ -138,7 +138,7 @@ const cambiarSlide = (dir: number) => {
     </main>
 
     <transition name="fade">
-      <div v-if="imagenSeleccionada" class="fixed inset-0 z-200 flex items-center justify-center p-4">
+      <div v-if="imagenSeleccionada" class="fixed inset-0 z-[200] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" @click="cerrarDetalle"></div>
         
         <div v-if="!modoZoom" class="relative bg-white border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(251,207,232,1)] max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row animate-pop">
@@ -163,11 +163,11 @@ const cambiarSlide = (dir: number) => {
 
           <div class="md:w-2/5 p-10 flex flex-col justify-center bg-white border-l-4 border-black">
             <h2 class="text-4xl poppins-bold uppercase leading-tight mb-4 tracking-tighter">{{ imagenSeleccionada.titulo }}</h2>
-            <p class="inter-bold text-sm uppercase tracking-wider text-black">TÃ©cnica: {{ imagenSeleccionada.tecnica }}</p>
+            <p class="inter-bold text-sm uppercase tracking-wider text-black">Técnica: {{ imagenSeleccionada.tecnica }}</p>
           </div>
         </div>
 
-        <div v-if="modoZoom" class="fixed inset-0 z-210 bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
+        <div v-if="modoZoom" class="fixed inset-0 z-[210] bg-black flex items-center justify-center p-4 cursor-zoom-out" @click="modoZoom = false">
             <img 
               :src="imagenSeleccionada.esCarrusel && imagenSeleccionada.items ? imagenSeleccionada.items[indiceDetalle]?.src : imagenSeleccionada.src" 
               class="max-w-full max-h-full object-contain" 
@@ -196,4 +196,3 @@ const cambiarSlide = (dir: number) => {
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
 </style>
-

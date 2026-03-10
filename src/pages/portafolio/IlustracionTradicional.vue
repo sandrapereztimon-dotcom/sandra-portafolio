@@ -40,7 +40,7 @@ const trabajos: Trabajo[] = [
   { id: 1, src: '/Img/IlustracionTradicional/Arbol.jpg', titulo: 'Árbol místico', tecnica: 'Acuarela' },
   { id: 2, src: '/Img/IlustracionTradicional/Caballo.jpg', titulo: 'Caballo Carrusel', tecnica: 'Tinta china' },
   { id: 3, src: '/Img/IlustracionTradicional/Calavera.jpg', titulo: 'Calavera', tecnica: 'Grafito' },
-  { id: 4, src: '/Img/IlustracionTradicional/cisne.jpg', titulo: 'Cisne', tecnica: 'Acuarela' },
+  { id: 4, src: '/Img/IlustracionTradicional/cisne.jpg', titulo: 'Cisne', tecnica: 'Ceras' },
   {
     id: 'proyecto-libro',
     esCarrusel: true,

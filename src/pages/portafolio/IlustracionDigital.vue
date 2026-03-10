@@ -42,11 +42,11 @@ const trabajos: Trabajo[] = [
       { type: 'video', src: '/Img/IlustracionDigital/Animacion_Letras.mp4', label: 'Motion Graphics Final' },
     ]
   },
-  { id: 1, src: '/Img/IlustracionDigital/Comision1.jpg', titulo: 'ComisiÃ³n Voley', tecnica: 'Digital' },
-  { id: 2, src: '/Img/IlustracionDigital/Comision2.jpg', titulo: 'ComisiÃ³n Retrato', tecnica: 'Digital' },
-  { id: 3, src: '/Img/IlustracionDigital/Comision3.jpg', titulo: 'ComisiÃ³n moto', tecnica: 'Digital' },
-  { id: 4, src: '/Img/IlustracionDigital/Comision4.jpg', titulo: 'IlustraciÃ³n Ã¡ngel', tecnica: 'Digital' },
-  { id: 5, src: '/Img/IlustracionDigital/IlustracionSelva.jpg', titulo: 'IlustraciÃ³n selva', tecnica: 'Digital' }
+  { id: 1, src: '/Img/IlustracionDigital/Comision1.jpg', titulo: 'Comisión Voley', tecnica: 'Digital' },
+  { id: 2, src: '/Img/IlustracionDigital/Comision2.jpg', titulo: 'Comisión Retrato', tecnica: 'Digital' },
+  { id: 3, src: '/Img/IlustracionDigital/Comision3.jpg', titulo: 'Comisión moto', tecnica: 'Digital' },
+  { id: 4, src: '/Img/IlustracionDigital/Comision4.jpg', titulo: 'Ilustración Ángel', tecnica: 'Digital' },
+  { id: 5, src: '/Img/IlustracionDigital/IlustracionSelva.jpg', titulo: 'Ilustración selva', tecnica: 'Digital' }
 ];
 
 // InicializaciÃ³n de Ã­ndices

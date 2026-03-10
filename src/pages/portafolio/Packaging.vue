@@ -16,13 +16,13 @@ const proyectos: ProyectoIndex[] = [
   { 
     id: 'kaoka', 
     titulo: 'Kaoka', 
-    tecnica: 'Branding & Packaging',
+    tecnica: 'Packaging',
     desc: 'Creación de la identidad visual de una marca de chocolates.' 
   },
   { 
     id: 'mentecatos', 
     titulo: 'Mentecatos', 
-    tecnica: 'Product Design',
+    tecnica: 'Packaging',
     desc: 'Creación de la identidad visual de un juego de mesa.' 
   }
 ];

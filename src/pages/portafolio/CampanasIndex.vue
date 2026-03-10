@@ -7,7 +7,7 @@ const campanas = [
   {
     id: 'lqnm',
     titulo: 'Lo Que Nos Mueve',
-    tecnica: 'Campana integral',
+    tecnica: 'Campaña visual',
     desc: 'Campaña integral con carteles, mupis y trípticos.'
   }
 ];

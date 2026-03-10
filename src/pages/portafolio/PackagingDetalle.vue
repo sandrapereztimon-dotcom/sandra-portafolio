@@ -33,7 +33,7 @@ let timerGlobal: number | null = null;
 const proyectosData: Record<string, Proyecto> = {
   'kaoka': {
     titulo: 'KAOKA',
-    descripcion: 'Identidad visual y packaging para una lÃ­nea de chocolates.',
+    descripcion: 'Identidad visual y packaging para una línea de chocolates.',
     galeria: [
       { id: 'chocolates', titulo: 'Gama de Sabores', tecnica: 'Packaging', fotos: ['/Img/Proyectos/Kaoka/ChocolateAmarilllo.jpg', '/Img/Proyectos/Kaoka/ChocolateMarrón.jpg', '/Img/Proyectos/Kaoka/ChocolateRosa.jpg', '/Img/Proyectos/Kaoka/ChocolateVerde.jpg']},
       { id: 'tarjetas', titulo: 'Tarjetas Visita', tecnica: 'Branding', fotos: ['/Img/Proyectos/Kaoka/TarjetaPresentacionDelante.jpg', '/Img/Proyectos/Kaoka/TarjetaPresentacionDetras.jpg']},
@@ -44,12 +44,12 @@ const proyectosData: Record<string, Proyecto> = {
   },
   'mentecatos': {
     titulo: 'MENTECATOS',
-    descripcion: 'DiseÃ±o integral de un juego de mesa sobre la salud mental.',
+    descripcion: 'Diseño integral de un juego de mesa sobre la salud mental.',
     galeria: [
-      { id: 'cartas', titulo: 'Mazo de Cartas', tecnica: 'IlustraciÃ³n', fotos: Array.from({length: 12}, (_, i) => `/Img/Proyectos/Mentecatos/cartas finales organizadas_page-${(i + 1).toString().padStart(4, '0')}.jpg`) },
+      { id: 'cartas', titulo: 'Mazo de Cartas', tecnica: 'Ilustración', fotos: Array.from({length: 12}, (_, i) => `/Img/Proyectos/Mentecatos/cartas finales organizadas_page-${(i + 1).toString().padStart(4, '0')}.jpg`) },
       { id: 'mockups', titulo: 'Mockups Juego', tecnica: 'Mockup', fotos: ['/Img/Proyectos/Mentecatos/Mock up 1.jpg', '/Img/Proyectos/Mentecatos/MockUp2.jpg', '/Img/Proyectos/Mentecatos/MockUp4.jpg', '/Img/Proyectos/Mentecatos/MockUp4.jpg']},
-      { id: 'caja_p', titulo: 'Packaging Caja', tecnica: 'DiseÃ±o', fotos: ['/Img/Proyectos/Mentecatos/CajaDelante.jpg', '/Img/Proyectos/Mentecatos/CajaMaqueta.jpg']},
-      { id: 'tablero', titulo: 'Tablero', tecnica: 'DiseÃ±o', fotos: ['/Img/Proyectos/Mentecatos/TableroMentecatos.jpg'] }
+      { id: 'caja_p', titulo: 'Packaging Caja', tecnica: 'Diseño', fotos: ['/Img/Proyectos/Mentecatos/CajaDelante.jpg', '/Img/Proyectos/Mentecatos/CajaMaqueta.jpg']},
+      { id: 'tablero', titulo: 'Tablero', tecnica: 'Diseño', fotos: ['/Img/Proyectos/Mentecatos/TableroMentecatos.jpg'] }
     ]
   }
 };

@@ -9,7 +9,6 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-    // --- NUEVAS RUTAS DE CONTACTO (Añadidas aquí) ---
     {
       path: '/contacto',
       name: 'contacto',
@@ -20,10 +19,8 @@ const router = createRouter({
       name: 'sobre-mi',
       component: () => import('../pages/contacto/SobreMi.vue')
     },
-    // --- PORTAFOLIO ---
     {
-      path: '/portafolio',
-      component: () => import('../pages/portafolio/PortfolioLayout.vue'),
+      path: '/portafolio', // He añadido el path base para que las subrutas tengan sentido
       children: [
         {
           path: '', 
@@ -56,7 +53,7 @@ const router = createRouter({
           component: () => import('../pages/portafolio/CampanaDetalle.vue')
         },
         {
-           path: 'packaging', // Quitamos la / inicial porque es un hijo
+           path: 'packaging',
            name: 'Packaging',
            component: () => import('../pages/portafolio/Packaging.vue')
         },
@@ -72,7 +69,7 @@ const router = createRouter({
         }
       ]
     }
-  ]
-})
+  ] // Cerramos el array de routes
+}) // Cerramos el objeto de createRouter
 
 export default router

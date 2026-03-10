@@ -29,12 +29,12 @@ let timerGlobal: number | null = null;
 const campanasData: Record<string, Campana> = {
   lqnm: {
     titulo: 'Lo Que Nos Mueve',
-    descripcion: 'Campaña visual con sistema de piezas para cartelería, mupis y trípticos.',
+    descripcion: 'Campaña visual que busca la relación intergeneracional de jóvenes con adultos.',
     galeria: [
       {
         id: 'carteles',
         titulo: 'Carteles',
-        tecnica: 'Diseño editorial',
+        tecnica: 'Ilustración',
         fotos: [
           '/Img/Proyectos/LQNM/Cartel A3 transversal def def amarillo.jpg',
           '/Img/Proyectos/LQNM/Cartel A3 transversal def def naranja.jpg',
@@ -44,7 +44,7 @@ const campanasData: Record<string, Campana> = {
       {
         id: 'mupis',
         titulo: 'Mupis',
-        tecnica: 'Publicidad exterior',
+        tecnica: 'Ilustración',
         fotos: [
           '/Img/Proyectos/LQNM/MupiAmarillo.jpg',
           '/Img/Proyectos/LQNM/MupiNaranja.jpg',
@@ -54,7 +54,7 @@ const campanasData: Record<string, Campana> = {
       {
         id: 'tripticos',
         titulo: 'Trípticos',
-        tecnica: 'Pieza editorial',
+        tecnica: 'Ilustración',
         fotos: [
           '/Img/Proyectos/LQNM/TrípticoAmarilloDelante.jpg',
           '/Img/Proyectos/LQNM/TrípticoAmarilloDetrás.jpg',

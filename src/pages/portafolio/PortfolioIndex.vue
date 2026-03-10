@@ -25,7 +25,7 @@ const categorias = [
     path: '/portafolio/digital', 
     icon: PenTool, 
     color: '#FFFFFF', 
-    desc: 'Arte conceptual, pintura digital y dibujo vectorial.' 
+    desc: 'Ilustración con programas digitales.' 
   },
   { 
     title: 'Diseño Editorial', 
@@ -39,14 +39,14 @@ const categorias = [
     path: '/portafolio/carteles', 
     icon: Ticket, 
     color: '#FFFFFF', 
-    desc: 'Comunicación visual, eventos y gráfica de gran formato.' 
+    desc: 'Gráfica de gran formato.' 
   },
   { 
     title: 'Packaging', 
     path: '/portafolio/packaging',
     icon: Box, 
     color: '#FBCFE8', 
-    desc: 'Diseño de envases y creación de experiencias físicas.' 
+    desc: 'Diseño de identidades visuales.' 
   },
   { 
     title: 'Campañas', 

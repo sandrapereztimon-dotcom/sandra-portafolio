@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
 import { Button } from '@/components/ui/button';
-import { Mail, Instagram, Linkedin, ArrowLeft, Send, Star, Circle, Triangle } from 'lucide-vue-next';
+import { Mail, Instagram, Send, Star, Circle, Triangle } from 'lucide-vue-next';
 import BarraDeNavegacion from '@/components/BarraDeNavegacion.vue';
 
+// --- ESTADO DEL FORMULARIO ---
 const formulario = ref({ nombre: '', email: '', mensaje: '' });
 const enviado = ref(false);
 
@@ -16,17 +16,32 @@ const enviarFormulario = () => {
   }, 4000);
 };
 
+// --- LÓGICA DE REDES ---
+const handleInstagramClick = (e: Event) => {
+  e.preventDefault(); // Evita que la página suba al inicio al hacer clic en '#'
+  alert("¡Próximamente disponible!");
+};
+
 const redes = [
-  { nombre: 'Instagram', url: '#', icon: Instagram },
-  { nombre: 'LinkedIn', url: '#', icon: Linkedin },
-  { nombre: 'Email', url: 'mailto:sandra@ejemplo.com', icon: Mail }
+  { 
+    nombre: 'Instagram', 
+    url: '#', 
+    icon: Instagram, 
+    action: handleInstagramClick 
+  },
+  { 
+    nombre: 'Email', 
+    url: 'mailto:sandra@ejemplo.com', // Cambia esto por tu email real
+    icon: Mail, 
+    action: null 
+  }
 ];
 </script>
 
 <template>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Poppins:wght@800&display=swap" rel="stylesheet">
 
-  <div class="min-h-screen bg-black text-white selection:bg-[#FBCFE8] selection:text-black relative overflow-hidden [&_nav_a]:text-black [&_a]:no-underline">
+  <div class="min-h-screen bg-black text-white selection:bg-[#FBCFE8] selection:text-black relative overflow-hidden [&_nav_a]:!text-black [&_a]:no-underline">
     
     <BarraDeNavegacion />
 
@@ -36,16 +51,12 @@ const redes = [
       <Triangle :size="300" class="absolute top-10 right-10 text-[#FBCFE8]/10 animate-spin-slow fill-current stroke-0" />
     </div>
 
-    <main class="max-w-6xl mx-auto px-6 py-12 md:py-20 relative z-10 flex flex-col items-center">
+    <main class="max-w-6xl mx-auto px-6 py-20 md:py-32 relative z-10 flex flex-col items-center">
       
-      <RouterLink to="/" class="self-start mb-12 flex items-center gap-2 poppins-bold uppercase hover:bg-white transition-all bg-[#FBCFE8] text-black px-6 py-3 border-4 border-black shadow-[6px_6px_0px_0px_rgba(255,255,255,0.3)] active:shadow-none active:translate-x-1 active:translate-y-1">
-        <ArrowLeft :size="20" /> Volver
-      </RouterLink>
-
       <div class="w-full bg-white text-black border-[6px] border-[#FBCFE8] shadow-[20px_20px_0px_0px_rgba(251,207,232,0.15)] p-8 md:p-16">
         
-        <h2 class="text-4xl sm:text-5xl md:text-7xl poppins-bold uppercase leading-none tracking-tighter mb-16">
-          ¿TRABAJAMOS <span class="text-[#FBCFE8] drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">JUNTOS?</span>
+        <h2 class="text-4xl sm:text-5xl md:text-7xl poppins-bold uppercase leading-none tracking-tighter mb-16 text-[#FBCFE8]">
+          ¿TRABAJAMOS JUNTOS?
         </h2>
 
         <div class="grid lg:grid-cols-2 gap-16">
@@ -58,7 +69,7 @@ const redes = [
                 type="text" 
                 required
                 class="w-full border-4 border-black p-5 focus:bg-[#FBCFE8] transition-colors outline-none inter-regular shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-lg" 
-                placeholder="Sandra Pérez..." 
+                placeholder="Escribe tu nombre..." 
               />
             </div>
 
@@ -98,18 +109,23 @@ const redes = [
             </transition>
           </form>
 
-          <div class="flex flex-col text-black">
+          <div class="flex flex-col">
             <div class="bg-black text-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(251,207,232,1)] mb-12">
-               <p class="text-2xl inter-regular leading-tight">
-                "Si tienes un proyecto en mente o simplemente quieres decir hola, ¡no dudes en escribirme!"
+               <p class="text-lg md:text-xl inter-regular leading-snug">
+                Si tienes un proyecto en mente o simplemente quieres decir hola, ¡no dudes en escribirme!
               </p>
             </div>
 
             <div class="space-y-4">
-              <h3 class="poppins-bold uppercase text-lg mb-6">O búscame en:</h3>
+              <h3 class="poppins-bold uppercase text-lg mb-6 text-black">O búscame en:</h3>
               <div class="grid grid-cols-1 gap-4">
-                <a v-for="red in redes" :key="red.nombre" :href="red.url" 
-                  class="flex items-center gap-4 p-5 bg-white border-4 border-black poppins-bold uppercase hover:bg-[#FBCFE8] transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group">
+                <a 
+                  v-for="red in redes" 
+                  :key="red.nombre" 
+                  :href="red.url" 
+                  @click="red.action ? red.action($event) : null"
+                  class="flex items-center gap-4 p-5 bg-white border-4 border-black poppins-bold text-black uppercase hover:bg-[#FBCFE8] transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] group"
+                >
                   <component :is="red.icon" :size="28" class="group-hover:rotate-12 transition-transform" /> 
                   <span class="text-lg">{{ red.nombre }}</span>
                 </a>
@@ -124,10 +140,12 @@ const redes = [
 </template>
 
 <style scoped>
+/* FUENTES */
 .poppins-bold { font-family: 'Poppins', sans-serif; font-weight: 800; }
 .inter-regular { font-family: 'Inter', sans-serif; font-weight: 400; }
 .inter-bold { font-family: 'Inter', sans-serif; font-weight: 700; }
 
+/* ANIMACIONES */
 @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes levitate {
@@ -139,6 +157,7 @@ const redes = [
 .animate-spin-very-slow { animation: spin-very-slow 40s linear infinite; }
 .animate-levitate { animation: levitate 10s ease-in-out infinite; }
 
+/* TRANSICIÓN FADE */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>
